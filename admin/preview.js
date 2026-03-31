@@ -9,6 +9,107 @@ var React = window.React;
 if (!React) { React = { createElement: function() { return null; } }; }
 var h = React.createElement;
 
+// ── Mockup écran d'ordinateur ────────────────────────────────
+var MOCKUP = {
+  wrap: {
+    background: '#111113',
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: '28px 16px 40px',
+    boxSizing: 'border-box',
+    fontFamily: 'system-ui, sans-serif'
+  },
+  monitor: {
+    width: '100%',
+    maxWidth: '920px',
+    background: '#1e1f22',
+    borderRadius: '12px 12px 0 0',
+    boxShadow: '0 0 0 1px #333, 0 28px 64px rgba(0,0,0,0.7)',
+    overflow: 'hidden',
+    border: '1px solid #2e2e32'
+  },
+  chrome: {
+    background: '#2c2c30',
+    borderBottom: '1px solid #1a1a1e',
+    padding: '9px 14px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    userSelect: 'none'
+  },
+  dots: { display: 'flex', gap: '6px', flexShrink: 0 },
+  dot: function(c) {
+    return { width: '11px', height: '11px', borderRadius: '50%', background: c, flexShrink: 0 };
+  },
+  bar: {
+    flex: 1,
+    background: '#1a1a1e',
+    borderRadius: '5px',
+    padding: '4px 12px',
+    fontSize: '11px',
+    color: '#666',
+    letterSpacing: '0.02em',
+    textAlign: 'center',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis'
+  },
+  screen: {
+    height: '600px',
+    overflow: 'hidden',
+    position: 'relative',
+    background: '#000'
+  },
+  iframe: { width: '100%', height: '100%', border: 'none', display: 'block' },
+  neck: {
+    width: '100%',
+    maxWidth: '920px',
+    background: '#17171a',
+    height: '14px',
+    boxShadow: '0 0 0 1px #2a2a2e'
+  },
+  stand: {
+    width: '180px',
+    height: '22px',
+    background: 'linear-gradient(to bottom, #1c1c20, #141416)',
+    borderRadius: '0 0 12px 12px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+  },
+  label: {
+    marginTop: '16px',
+    fontSize: '10px',
+    letterSpacing: '0.18em',
+    textTransform: 'uppercase',
+    color: '#444',
+    textAlign: 'center'
+  }
+};
+
+function ComputerMockup(props) {
+  return h('div', { style: MOCKUP.wrap },
+    h('div', { style: MOCKUP.monitor },
+      // Barre navigateur
+      h('div', { style: MOCKUP.chrome },
+        h('div', { style: MOCKUP.dots },
+          h('div', { style: MOCKUP.dot('#ff5f57') }),
+          h('div', { style: MOCKUP.dot('#febc2e') }),
+          h('div', { style: MOCKUP.dot('#28c840') })
+        ),
+        h('div', { style: MOCKUP.bar }, props.url || 'amrstudio.netlify.app')
+      ),
+      // Écran
+      h('div', { style: MOCKUP.screen }, props.children)
+    ),
+    // Pied du moniteur
+    h('div', { style: MOCKUP.neck }),
+    h('div', { style: MOCKUP.stand }),
+    h('p', { style: MOCKUP.label }, 'Aper\u00E7u en temps r\u00E9el')
+  );
+}
+
 // Convertit un chemin relatif en chemin absolu
 function absPath(p) {
   if (!p) return '';
@@ -171,10 +272,9 @@ var GalleriesPreview = function(props) {
     var galArr   = galToJS(galleries);
     var html     = buildSiteHTML(safeJSON({ galleries: galArr }), safeJSON({}));
 
-    return h('iframe', {
-      srcDoc: html,
-      style: { width: '100%', height: '100vh', border: 'none', display: 'block' }
-    });
+    return h(ComputerMockup, { url: 'amrstudio.netlify.app' },
+      h('iframe', { srcDoc: html, style: MOCKUP.iframe })
+    );
   } catch (e) {
     return h('div', { style: { padding: '20px', color: '#888' } }, 'Aper\u00E7u non disponible.');
   }
@@ -218,10 +318,9 @@ var GeneralPreview = function(props) {
 
     var html = buildSiteHTML(safeJSON(galData), safeJSON(settings));
 
-    return h('iframe', {
-      srcDoc: html,
-      style: { width: '100%', height: '100vh', border: 'none', display: 'block' }
-    });
+    return h(ComputerMockup, { url: 'amrstudio.netlify.app' },
+      h('iframe', { srcDoc: html, style: MOCKUP.iframe })
+    );
   } catch (e) {
     return h('div', { style: { padding: '20px', color: '#888' } }, 'Aper\u00E7u non disponible.');
   }
