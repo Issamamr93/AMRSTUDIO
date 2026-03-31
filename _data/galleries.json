@@ -153,19 +153,6 @@
           "caption": "Repas convivial"
         }
       ]
-    },
-    {
-      "key": "test",
-      "title": "test",
-      "tagline": "test",
-      "description": "jldncnsb",
-      "cover": "/assets/uploads/img_5715.jpg",
-      "photos": [
-        {
-          "src": "/assets/uploads/img_5714.jpg",
-          "caption": "aid"
-        }
-      ]
     }
   ]
 }
