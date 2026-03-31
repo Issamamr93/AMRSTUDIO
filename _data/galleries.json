@@ -149,18 +149,6 @@
           "caption": "LDC"
         }
       ]
-    },
-    {
-      "key": "aid",
-      "title": "aid",
-      "tagline": "aid",
-      "description": "utft",
-      "cover": "/assets/uploads/img_5714.jpg",
-      "photos": [
-        {
-          "src": "/assets/uploads/img_5715.jpg"
-        }
-      ]
     }
   ]
 }
