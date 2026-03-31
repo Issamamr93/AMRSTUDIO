@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin — AMR Studio</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <link rel="stylesheet" href="/admin/admin.css" />
+  <style>
+    /* Masquer le flash blanc au chargement */
+    html, body { background: #0e0f14 !important; margin: 0; }
+  </style>
 </head>
 <body>
-  <!-- React chargé avant le CMS (approche v2) -->
   <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>

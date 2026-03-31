@@ -1,0 +1,313 @@
+/* =============================================
+   AMR STUDIO — Interface Admin Personnalisée
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Variables ── */
+:root {
+  --admin-bg: #0e0f14;
+  --admin-sidebar: #13141a;
+  --admin-surface: #1a1b22;
+  --admin-surface2: #22232d;
+  --admin-border: rgba(255,255,255,0.07);
+  --admin-accent: #c8a882;
+  --admin-accent2: #1b3140;
+  --admin-text: #e4dfd7;
+  --admin-muted: rgba(228,223,215,0.45);
+  --admin-radius: 8px;
+}
+
+/* ── Reset global ── */
+* { box-sizing: border-box; }
+
+body, html {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  background: var(--admin-bg) !important;
+}
+
+/* ── App shell ── */
+[class*="App-"] {
+  background: var(--admin-bg) !important;
+}
+
+/* ── Sidebar ── */
+[class*="Sidebar"],
+nav[class*="Nav"],
+[class*="sidebar"],
+aside {
+  background: var(--admin-sidebar) !important;
+  border-right: 1px solid var(--admin-border) !important;
+}
+
+/* Logo / Brand dans la sidebar */
+[class*="Brand"],
+[class*="brand"] {
+  background: transparent !important;
+  border-bottom: 1px solid var(--admin-border) !important;
+  padding: 20px 16px !important;
+}
+
+/* Items de navigation */
+[class*="NavLink"],
+[class*="navLink"],
+[class*="nav-link"] {
+  color: var(--admin-muted) !important;
+  border-radius: 6px !important;
+  margin: 2px 8px !important;
+  transition: all 0.2s ease !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+}
+
+[class*="NavLink"]:hover,
+[class*="navLink"]:hover,
+[class*="NavLink"][class*="active"],
+[class*="navLink"][class*="active"] {
+  background: rgba(200,168,130,0.12) !important;
+  color: var(--admin-accent) !important;
+}
+
+/* ── Zone de contenu principale ── */
+[class*="App-main"],
+[class*="main-content"],
+[class*="MainView"],
+main {
+  background: var(--admin-bg) !important;
+}
+
+/* ── En-têtes de collection ── */
+[class*="CollectionView"],
+[class*="collection-view"] {
+  background: var(--admin-bg) !important;
+}
+
+/* ── Cartes / Items de liste ── */
+[class*="Card"],
+[class*="EntryCard"],
+[class*="entry-card"] {
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: var(--admin-radius) !important;
+  transition: all 0.2s ease !important;
+  overflow: hidden !important;
+}
+
+[class*="Card"]:hover,
+[class*="EntryCard"]:hover {
+  border-color: rgba(200,168,130,0.3) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
+}
+
+/* ── Éditeur ── */
+[class*="EditorControl"],
+[class*="editor-control"],
+[class*="ControlPane"],
+[class*="EditorInterface"] {
+  background: var(--admin-bg) !important;
+}
+
+/* ── Champs de formulaire ── */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+textarea,
+[class*="TextInput"],
+[class*="text-input"] {
+  background: var(--admin-surface2) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: 6px !important;
+  color: var(--admin-text) !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 14px !important;
+  transition: border-color 0.2s ease !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+  border-color: var(--admin-accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(200,168,130,0.12) !important;
+}
+
+/* ── Labels des champs ── */
+label,
+[class*="Label"],
+[class*="FieldLabel"] {
+  color: var(--admin-muted) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+/* ── Boutons ── */
+button[class*="Button"],
+[class*="button"],
+button[type="submit"] {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Bouton primaire (Publier, Sauvegarder) */
+[class*="primary"],
+button[class*="Publish"],
+[data-testid="publish-button"] {
+  background: var(--admin-accent) !important;
+  color: #111 !important;
+  border: none !important;
+}
+
+[class*="primary"]:hover,
+button[class*="Publish"]:hover {
+  background: #d4b896 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(200,168,130,0.3) !important;
+}
+
+/* Bouton secondaire */
+[class*="secondary"] {
+  background: transparent !important;
+  border: 1px solid var(--admin-border) !important;
+  color: var(--admin-muted) !important;
+}
+
+[class*="secondary"]:hover {
+  border-color: var(--admin-accent) !important;
+  color: var(--admin-accent) !important;
+}
+
+/* ── Barre d'outils de l'éditeur ── */
+[class*="Toolbar"],
+[class*="toolbar"] {
+  background: var(--admin-sidebar) !important;
+  border-bottom: 1px solid var(--admin-border) !important;
+  padding: 8px 16px !important;
+}
+
+/* ── Status bar / Header ── */
+[class*="StatusBar"],
+[class*="EditorToolbar"],
+[class*="editor-toolbar"] {
+  background: var(--admin-surface) !important;
+  border-bottom: 1px solid var(--admin-border) !important;
+}
+
+/* ── Widget Liste (galeries, photos) ── */
+[class*="ListItem"],
+[class*="list-item"],
+[class*="SortableItem"] {
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: var(--admin-radius) !important;
+  margin-bottom: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+[class*="ListItem"]:hover,
+[class*="SortableItem"]:hover {
+  border-color: rgba(200,168,130,0.25) !important;
+}
+
+/* ── Widget Image ── */
+[class*="ImageWrapper"],
+[class*="image-wrapper"] {
+  border: 2px dashed var(--admin-border) !important;
+  border-radius: var(--admin-radius) !important;
+  background: var(--admin-surface2) !important;
+  transition: border-color 0.2s ease !important;
+}
+
+[class*="ImageWrapper"]:hover {
+  border-color: var(--admin-accent) !important;
+}
+
+/* ── Zone de prévisualisation ── */
+[class*="PreviewPane"],
+[class*="preview-pane"],
+iframe[class*="preview"] {
+  border-left: 1px solid var(--admin-border) !important;
+  background: #1a1a2e !important;
+}
+
+/* ── Scrollbars ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(200,168,130,0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(200,168,130,0.4);
+}
+
+/* ── Toast / Notifications ── */
+[class*="Toast"],
+[class*="Notification"] {
+  background: var(--admin-surface2) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: var(--admin-radius) !important;
+  color: var(--admin-text) !important;
+}
+
+/* ── Modal / Dialogue ── */
+[class*="Modal"],
+[class*="Dialog"],
+[class*="modal"] {
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.8) !important;
+}
+
+/* ── Médias (sélecteur de fichiers) ── */
+[class*="MediaLibrary"],
+[class*="media-library"] {
+  background: var(--admin-bg) !important;
+}
+
+[class*="MediaCard"],
+[class*="media-card"] {
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: var(--admin-radius) !important;
+}
+
+/* ── Sélection / Hover states ── */
+[class*="selected"],
+[class*="active"][class*="Tab"] {
+  border-color: var(--admin-accent) !important;
+  color: var(--admin-accent) !important;
+}
+
+/* ── Dividers ── */
+hr, [class*="Divider"] {
+  border-color: var(--admin-border) !important;
+}
+
+/* ── Texte général ── */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--admin-text) !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
+
+p, span, div {
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
