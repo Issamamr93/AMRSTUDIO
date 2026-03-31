@@ -155,13 +155,45 @@ function buildSiteHTML(galJSON, setJSON) {
   );
 }
 
+// ── Cadre navigateur desktop ─────────────────────────────────
+var pcFrame = {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  height: '100vh',
+  background: '#0f0e0d',
+  borderRadius: '8px',
+  overflow: 'hidden',
+  boxShadow: '0 8px 32px rgba(0,0,0,0.6)'
+};
+var pcBar = {
+  display: 'flex',
+  alignItems: 'center',
+  background: '#1a1a1a',
+  borderBottom: '1px solid #333',
+  height: '32px',
+  padding: '0 12px',
+  gap: '6px',
+  flexShrink: 0,
+  userSelect: 'none'
+};
+
 // ── Galeries : données CMS temps réel ────────────────────────
 var GalleriesPreview = function(props) {
   try {
     var galleries = props.entry.get('data').get('galleries');
     var galArr    = galToJS(galleries);
     var html      = buildSiteHTML(safeJSON({ galleries: galArr }), safeJSON({}));
-    return h('iframe', { srcDoc: html, style: { width: '100%', height: '100vh', border: 'none', display: 'block' } });
+    return h('div', { style: pcFrame },
+      h('div', { style: pcBar },
+        h('span', { style: { fontSize:'12px' } }, '🌐'),
+        h('span', { style: { flex:1, fontSize:'11px', color:'#aaa', marginLeft:'8px' } }, 'amrstudio.netlify.app'),
+        h('span', { style: { fontSize:'11px', color:'#555', marginRight:'4px' } }, '─'),
+        h('span', { style: { fontSize:'11px', color:'#555', marginRight:'4px' } }, '□'),
+        h('span', { style: { fontSize:'11px', color:'#555' } }, '✕')
+      ),
+      h('iframe', { srcDoc: html, style: { width:'100%', flex:1, border:'none', display:'block' } })
+    );
   } catch(e) {
     return h('div', { style: { padding: '20px', color: '#888' } }, 'Aper\u00E7u non disponible.');
   }
@@ -172,15 +204,20 @@ var GeneralPreview = function(props) {
   try {
     var data     = props.entry.get('data');
     var raw      = data.toJS ? data.toJS() : {};
-
-    // Rendre les chemins absolus pour que l'iframe srcdoc les résolve
     var settings = Object.assign({}, raw, {
       cover_image: absPath(raw.cover_image || '')
     });
-
-    // Galeries depuis le cache pré-chargé (pas de hooks/fetch dans le composant)
     var html = buildSiteHTML(cachedGalleriesJSON, safeJSON(settings));
-    return h('iframe', { srcDoc: html, style: { width: '100%', height: '100vh', border: 'none', display: 'block' } });
+    return h('div', { style: pcFrame },
+      h('div', { style: pcBar },
+        h('span', { style: { fontSize:'12px' } }, '🌐'),
+        h('span', { style: { flex:1, fontSize:'11px', color:'#aaa', marginLeft:'8px' } }, 'amrstudio.netlify.app'),
+        h('span', { style: { fontSize:'11px', color:'#555', marginRight:'4px' } }, '─'),
+        h('span', { style: { fontSize:'11px', color:'#555', marginRight:'4px' } }, '□'),
+        h('span', { style: { fontSize:'11px', color:'#555' } }, '✕')
+      ),
+      h('iframe', { srcDoc: html, style: { width:'100%', flex:1, border:'none', display:'block' } })
+    );
   } catch(e) {
     return h('div', { style: { padding: '20px', color: '#888' } }, 'Aper\u00E7u non disponible.');
   }

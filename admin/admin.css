@@ -1,93 +1,146 @@
 /* =============================================
-   AMR STUDIO — Admin UI
-   #0f0e0d · #f5f2ee · #c8a882
+   AMR STUDIO — Admin Dark Theme
+   Force le thème sombre sur netlify-cms v2
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
+/* ── Reset corps ── */
 *, *::before, *::after { box-sizing: border-box; }
+html, body { background: #0f0e0d !important; color: #f5f2ee !important; margin: 0; }
 
-html { background: #0f0e0d; }
-
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background: #0f0e0d;
-  color: #f5f2ee;
-  margin: 0;
+/* ── Force dark sur TOUT l'arbre CMS ── */
+#nc-root,
+#nc-root > div,
+#nc-root > div > div {
+  background: #0f0e0d !important;
+  color: #f5f2ee !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
 }
 
-a { color: #f5f2ee; text-decoration: none; }
-a:hover { color: #c8a882; }
-
-/* ── Champs ── */
-input,
-textarea,
-select {
-  background: #1c1a18;
-  border: 1px solid rgba(245,242,238,0.1);
-  border-radius: 6px;
-  color: #f5f2ee;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 14px;
-  padding: 10px 14px;
-  width: 100%;
-  transition: border-color 0.2s, box-shadow 0.2s;
+/* Tous les éléments dans le CMS → fond sombre */
+#nc-root div,
+#nc-root section,
+#nc-root article,
+#nc-root aside,
+#nc-root header,
+#nc-root main,
+#nc-root nav,
+#nc-root ul,
+#nc-root li,
+#nc-root span,
+#nc-root p,
+#nc-root h1, #nc-root h2, #nc-root h3, #nc-root h4, #nc-root h5, #nc-root h6 {
+  background-color: #0f0e0d !important;
+  color: #f5f2ee !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #c8a882;
-  box-shadow: 0 0 0 3px rgba(200,168,130,0.12);
-  outline: none;
+/* ── Sidebar légèrement distincte ── */
+#nc-root aside,
+#nc-root aside div,
+#nc-root aside nav,
+#nc-root aside ul,
+#nc-root aside li,
+#nc-root aside span,
+#nc-root aside p {
+  background-color: #0a0908 !important;
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: rgba(245,242,238,0.28);
+/* ── Liens dans le CMS ── */
+#nc-root a,
+#nc-root a span,
+#nc-root a div {
+  background-color: transparent !important;
+  color: rgba(245,242,238,0.55) !important;
+  text-decoration: none !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  transition: color 0.2s !important;
+}
+#nc-root a:hover,
+#nc-root a:hover span {
+  color: #c8a882 !important;
+}
+
+/* ── Inputs / Textarea / Select ── */
+#nc-root input,
+#nc-root textarea,
+#nc-root select {
+  background-color: #1c1a18 !important;
+  color: #f5f2ee !important;
+  border: 1px solid rgba(245,242,238,0.12) !important;
+  border-radius: 6px !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 14px !important;
+  padding: 10px 14px !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  outline: none !important;
+}
+#nc-root input:focus,
+#nc-root textarea:focus,
+#nc-root select:focus {
+  border-color: #c8a882 !important;
+  box-shadow: 0 0 0 3px rgba(200,168,130,0.12) !important;
+}
+#nc-root input::placeholder,
+#nc-root textarea::placeholder {
+  color: rgba(245,242,238,0.28) !important;
 }
 
 /* ── Labels ── */
-label {
-  color: rgba(245,242,238,0.45);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 6px;
+#nc-root label {
+  color: rgba(245,242,238,0.45) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  background: transparent !important;
 }
 
 /* ── Boutons ── */
-button {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.18s;
+#nc-root button {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  background-color: #1c1a18 !important;
+  color: #f5f2ee !important;
+  border: 1px solid rgba(245,242,238,0.1) !important;
+  transition: all 0.18s !important;
+}
+#nc-root button:hover {
+  border-color: rgba(200,168,130,0.4) !important;
+  color: #c8a882 !important;
 }
 
-/* ── Titres ── */
-h1, h2, h3, h4, h5, h6 {
-  color: #f5f2ee;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-weight: 600;
+/* Bouton primaire (Publier) — fond doré */
+#nc-root button[class*="success"],
+#nc-root button[type="submit"] {
+  background-color: #c8a882 !important;
+  color: #0f0e0d !important;
+  border-color: #c8a882 !important;
+  font-weight: 600 !important;
+}
+#nc-root button[class*="success"]:hover,
+#nc-root button[type="submit"]:hover {
+  background-color: #d4b896 !important;
+  color: #0f0e0d !important;
 }
 
-p, span, li, div {
-  font-family: 'Inter', system-ui, sans-serif;
+/* ── Images et SVG — pas de fond ── */
+#nc-root img,
+#nc-root svg,
+#nc-root iframe,
+#nc-root video {
+  background-color: transparent !important;
 }
 
-/* ── Scrollbars fines ── */
+/* ── Scrollbars ── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: rgba(200,168,130,0.2);
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(200,168,130,0.45);
-}
+::-webkit-scrollbar-thumb { background: rgba(200,168,130,0.2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200,168,130,0.45); }
 
-hr { border: none; border-top: 1px solid rgba(245,242,238,0.07); }
+/* ── Séparateurs ── */
+#nc-root hr { border: none !important; border-top: 1px solid rgba(245,242,238,0.07) !important; background: none !important; }
