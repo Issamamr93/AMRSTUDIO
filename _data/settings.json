@@ -1,15 +1,15 @@
 {
   "photographer_name": "Issam Amer",
-  "hero_kicker": "Photographe",
-  "hero_title": "AMR Studio",
-  "hero_subtitle": "Jeune photographe français. Je photographie ce qui m'entoure — mes voyages, la rue, les gens, les instants. Pas de spécialité, juste un œil et un appareil.",
-  "cover_image": "couverture.JPG",
-  "overview_title": "Ce que j'ai capturé",
-  "overview_text": "Des voyages, de la street, des moments du quotidien. Certaines photos viennent de loin, d'autres d'à côté. Clique sur une image pour voir la galerie.",
+  "meta_description": "Portfolio d'Issam Amer — jeune photographe français. Street, voyages, portraits et tout le reste.",
+  "instagram_url": "https://www.instagram.com/issvmm___/",
   "footer_tagline": "Photographe.",
-  "footer_text": "Jeune photographe français, je shoote ce qui me plaît — en voyage comme en bas de chez moi. Street, portraits, paysages. Toujours partant pour un projet.",
-  "email": "issamer932@gmail.com",
-  "instagram_url": "https://www.instagram.com/qr/",
   "linkedin_url": "https://www.linkedin.com",
-  "meta_description": "Portfolio d'Issam Amer — jeune photographe français. Street, voyages, portraits et tout le reste."
+  "footer_text": "Jeune photographe français, je shoote ce qui me plaît — en voyage comme en bas de chez moi. Street, portraits, paysages. Toujours partant pour un projet.",
+  "overview_title": "Ce que j'ai capturé",
+  "overview_text": "Des voyages, de la street, des moments du quotidien. Certaines photos viennent de loin, d'autres d'à côté. ",
+  "hero_title": "AMR Studio",
+  "cover_image": "couverture.JPG",
+  "hero_kicker": "Photographe",
+  "email": "issamer932@gmail.com",
+  "hero_subtitle": "Jeune photographe français. Je photographie ce qui m'entoure — mes voyages, la rue, les gens, les instants. Pas de spécialité, juste un œil et un appareil."
 }
