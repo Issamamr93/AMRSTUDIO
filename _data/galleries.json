@@ -8,10 +8,22 @@
       "cover": "/assets/voyages/chamonix/DSC02965.jpg",
       "overview_image": "/assets/voyages/chamonix/DSC03014.jpg",
       "photos": [
-        { "src": "/assets/voyages/chamonix/DSC02965.jpg", "caption": "Lac Blanc" },
-        { "src": "/assets/voyages/chamonix/DSC02979.jpg", "caption": "Lac Blanc" },
-        { "src": "/assets/voyages/chamonix/lacblanc.jpeg", "caption": "Lac Blanc" },
-        { "src": "/assets/voyages/chamonix/DSC03014.jpg", "caption": "Lac Blanc" }
+        {
+          "src": "/assets/voyages/chamonix/DSC02965.jpg",
+          "caption": "Lac Blanc"
+        },
+        {
+          "src": "/assets/voyages/chamonix/DSC02979.jpg",
+          "caption": "Lac Blanc"
+        },
+        {
+          "src": "/assets/voyages/chamonix/lacblanc.jpeg",
+          "caption": "Lac Blanc"
+        },
+        {
+          "src": "/assets/voyages/chamonix/DSC03014.jpg",
+          "caption": "Lac Blanc"
+        }
       ]
     },
     {
@@ -22,13 +34,34 @@
       "cover": "/assets/voyages/suisse/cascade.jpg",
       "overview_image": "/assets/voyages/suisse/IMG_5384.JPG",
       "photos": [
-        { "src": "/assets/voyages/suisse/cascade.jpg", "caption": "Lauterbrunnen" },
-        { "src": "/assets/voyages/suisse/chalet.jpeg", "caption": "Lauterbrunnen" },
-        { "src": "/assets/voyages/suisse/DSC01173.jpg", "caption": "Mürren" },
-        { "src": "/assets/voyages/suisse/IMG_5384.JPG", "caption": "Lac Oeschinensee" },
-        { "src": "/assets/voyages/suisse/couple.jpg", "caption": "Mürren" },
-        { "src": "/assets/voyages/suisse/moi.jpg", "caption": "Lac Blausee" },
-        { "src": "/assets/voyages/suisse/ochi.jpg", "caption": "Lac Oeschinensee" }
+        {
+          "src": "/assets/voyages/suisse/cascade.jpg",
+          "caption": "Lauterbrunnen"
+        },
+        {
+          "src": "/assets/voyages/suisse/chalet.jpeg",
+          "caption": "Lauterbrunnen"
+        },
+        {
+          "src": "/assets/voyages/suisse/DSC01173.jpg",
+          "caption": "Mürren"
+        },
+        {
+          "src": "/assets/voyages/suisse/IMG_5384.JPG",
+          "caption": "Lac Oeschinensee"
+        },
+        {
+          "src": "/assets/voyages/suisse/couple.jpg",
+          "caption": "Mürren"
+        },
+        {
+          "src": "/assets/voyages/suisse/moi.jpg",
+          "caption": "Lac Blausee"
+        },
+        {
+          "src": "/assets/voyages/suisse/ochi.jpg",
+          "caption": "Lac Oeschinensee"
+        }
       ]
     },
     {
@@ -39,12 +72,30 @@
       "cover": "/assets/voyages/indonesie/4-DSC02723.jpg",
       "overview_image": "/assets/voyages/indonesie/3-DSC02752.jpg",
       "photos": [
-        { "src": "/assets/voyages/indonesie/4-DSC02723.jpg", "caption": "Kelingking Beach" },
-        { "src": "/assets/voyages/indonesie/3-DSC02752.jpg", "caption": "Nusa Penida" },
-        { "src": "/assets/voyages/indonesie/DSC02820.jpg", "caption": "Mont Batur" },
-        { "src": "/assets/voyages/indonesie/DSC02838.jpg", "caption": "Mont Batur" },
-        { "src": "/assets/voyages/indonesie/IMG_3278.jpeg", "caption": "Sanur" },
-        { "src": "/assets/voyages/indonesie/sanur2.jpg", "caption": "Sanur" }
+        {
+          "src": "/assets/voyages/indonesie/4-DSC02723.jpg",
+          "caption": "Kelingking Beach"
+        },
+        {
+          "src": "/assets/voyages/indonesie/3-DSC02752.jpg",
+          "caption": "Nusa Penida"
+        },
+        {
+          "src": "/assets/voyages/indonesie/DSC02820.jpg",
+          "caption": "Mont Batur"
+        },
+        {
+          "src": "/assets/voyages/indonesie/DSC02838.jpg",
+          "caption": "Mont Batur"
+        },
+        {
+          "src": "/assets/voyages/indonesie/IMG_3278.jpeg",
+          "caption": "Sanur"
+        },
+        {
+          "src": "/assets/voyages/indonesie/sanur2.jpg",
+          "caption": "Sanur"
+        }
       ]
     },
     {
@@ -55,11 +106,26 @@
       "cover": "/assets/voyages/malaisie/DSC02487.jpg",
       "overview_image": "/assets/voyages/malaisie/DSC02529.jpg",
       "photos": [
-        { "src": "/assets/voyages/malaisie/DSC02487.jpg", "caption": "Langkawi" },
-        { "src": "/assets/voyages/malaisie/DSC02529.jpg", "caption": "Langkawi" },
-        { "src": "/assets/voyages/malaisie/mrose.jpeg", "caption": "Putrajaya" },
-        { "src": "/assets/voyages/malaisie/mrose2.jpeg", "caption": "Putrajaya" },
-        { "src": "/assets/voyages/malaisie/putrajaya.jpeg", "caption": "Putrajaya" }
+        {
+          "src": "/assets/voyages/malaisie/DSC02487.jpg",
+          "caption": "Langkawi"
+        },
+        {
+          "src": "/assets/voyages/malaisie/DSC02529.jpg",
+          "caption": "Langkawi"
+        },
+        {
+          "src": "/assets/voyages/malaisie/mrose.jpeg",
+          "caption": "Putrajaya"
+        },
+        {
+          "src": "/assets/voyages/malaisie/mrose2.jpeg",
+          "caption": "Putrajaya"
+        },
+        {
+          "src": "/assets/voyages/malaisie/putrajaya.jpeg",
+          "caption": "Putrajaya"
+        }
       ]
     },
     {
@@ -70,9 +136,22 @@
       "cover": "/assets/voyages/ldc/ldc2.jpg",
       "overview_image": "/assets/voyages/ldc/ldc.jpg",
       "photos": [
-        { "src": "/assets/voyages/ldc/ldc.jpg", "caption": "LDC" },
-        { "src": "/assets/voyages/ldc/nldc.jpg", "caption": "LDC" },
-        { "src": "/assets/voyages/ldc/ldc2.jpg", "caption": "LDC" }
+        {
+          "src": "/assets/voyages/ldc/ldc.jpg",
+          "caption": "LDC"
+        },
+        {
+          "src": "/assets/voyages/ldc/nldc.jpg",
+          "caption": "LDC"
+        },
+        {
+          "src": "/assets/voyages/ldc/ldc2.jpg",
+          "caption": "LDC"
+        },
+        {
+          "src": "/img_5714.jpg",
+          "caption": "AID 2026"
+        }
       ]
     }
   ]
