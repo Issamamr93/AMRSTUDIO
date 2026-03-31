@@ -18,6 +18,26 @@ function safeJSON(obj) {
   return JSON.stringify(obj).replace(/<\//g, '<\\/');
 }
 
+// Pré-chargement des galeries au démarrage (pas de hooks nécessaire)
+var cachedGalleriesJSON = safeJSON({ galleries: [] });
+fetch('/_data/galleries.json')
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    var processed = {
+      galleries: (d.galleries || []).map(function(g) {
+        return Object.assign({}, g, {
+          cover:          absPath(g.cover          || ''),
+          overview_image: absPath(g.overview_image || ''),
+          photos: (g.photos || []).map(function(p) {
+            return Object.assign({}, p, { src: absPath(p.src || '') });
+          })
+        });
+      })
+    };
+    cachedGalleriesJSON = safeJSON(processed);
+  })
+  .catch(function() {});
+
 function galToJS(galleries) {
   if (!galleries) return [];
   return galleries.toJS().map(function(g) {
@@ -35,14 +55,8 @@ function galToJS(galleries) {
   });
 }
 
-// HTML complet du site — overrides fetch selon les paramètres passés
-// overrideGal = true  → injecte les galeries du CMS (pour GalleriesPreview)
-// overrideGal = false → laisse script.js fetcher les vraies galeries (pour GeneralPreview)
-function buildSiteHTML(galJSON, setJSON, overrideGal) {
-  var galOverride = overrideGal
-    ? 'if(typeof u==="string"&&u.indexOf("galleries.json")!==-1)return Promise.resolve({ok:true,json:function(){return Promise.resolve(g);}});'
-    : '';
-
+// HTML complet du site avec données injectées
+function buildSiteHTML(galJSON, setJSON) {
   return (
     '<!DOCTYPE html>' +
     '<html lang="fr" data-theme="light"><head>' +
@@ -124,13 +138,13 @@ function buildSiteHTML(galJSON, setJSON, overrideGal) {
       '<div class="lightbox-caption" id="lightbox-caption"></div>' +
     '</div>' +
 
-    // Injection données + override fetch
     '<script>(function(){' +
       'var g=' + galJSON + ';' +
       'var s=' + setJSON + ';' +
       'var o=window.fetch;' +
       'window.fetch=function(u,opts){' +
-        galOverride +
+        'if(typeof u==="string"&&u.indexOf("galleries.json")!==-1)' +
+          'return Promise.resolve({ok:true,json:function(){return Promise.resolve(g);}});' +
         'if(typeof u==="string"&&u.indexOf("settings.json")!==-1)' +
           'return Promise.resolve({ok:true,json:function(){return Promise.resolve(s);}});' +
         'return o?o.call(this,u,opts):Promise.reject(new Error("no fetch"));' +
@@ -141,27 +155,31 @@ function buildSiteHTML(galJSON, setJSON, overrideGal) {
   );
 }
 
-// ── Aperçu Galeries — données CMS injectées ──────────────────
+// ── Galeries : données CMS temps réel ────────────────────────
 var GalleriesPreview = function(props) {
   try {
     var galleries = props.entry.get('data').get('galleries');
     var galArr    = galToJS(galleries);
-    var html      = buildSiteHTML(safeJSON({ galleries: galArr }), safeJSON({}), true);
+    var html      = buildSiteHTML(safeJSON({ galleries: galArr }), safeJSON({}));
     return h('iframe', { srcDoc: html, style: { width: '100%', height: '100vh', border: 'none', display: 'block' } });
   } catch(e) {
     return h('div', { style: { padding: '20px', color: '#888' } }, 'Aper\u00E7u non disponible.');
   }
 };
 
-// ── Aperçu Paramètres généraux — settings injectés, vraies galeries via fetch ──
-// Pas de hooks (useState/useEffect) — incompatibles avec netlify-cms v2
-// script.js fetch galleries.json depuis le serveur normalement
+// ── Paramètres généraux : settings temps réel + galeries pré-chargées ──
 var GeneralPreview = function(props) {
   try {
     var data     = props.entry.get('data');
-    var settings = data.toJS ? data.toJS() : {};
-    // On n'override PAS galleries.json → script.js charge les vraies galeries
-    var html = buildSiteHTML(safeJSON({ galleries: [] }), safeJSON(settings), false);
+    var raw      = data.toJS ? data.toJS() : {};
+
+    // Rendre les chemins absolus pour que l'iframe srcdoc les résolve
+    var settings = Object.assign({}, raw, {
+      cover_image: absPath(raw.cover_image || '')
+    });
+
+    // Galeries depuis le cache pré-chargé (pas de hooks/fetch dans le composant)
+    var html = buildSiteHTML(cachedGalleriesJSON, safeJSON(settings));
     return h('iframe', { srcDoc: html, style: { width: '100%', height: '100vh', border: 'none', display: 'block' } });
   } catch(e) {
     return h('div', { style: { padding: '20px', color: '#888' } }, 'Aper\u00E7u non disponible.');
