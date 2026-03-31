@@ -1,0 +1,25 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "settings"
+    label: "Paramètres du site"
+    files:
+      - label: "Informations générales"
+        name: "general"
+        file: "_data/settings.json"
+        format: json
+        fields:
+          - { label: "Nom du photographe", name: "photographer_name", widget: "string" }
+          - { label: "Titre principal (Hero)", name: "hero_title", widget: "string" }
+          - { label: "Sous-titre Hero", name: "hero_subtitle", widget: "text" }
+          - { label: "Accroche pied de page", name: "footer_tagline", widget: "string" }
+          - { label: "Texte pied de page", name: "footer_text", widget: "text" }
+          - { label: "E-mail de contact", name: "email", widget: "string" }
+          - { label: "URL Instagram", name: "instagram_url", widget: "string" }
+          - { label: "URL LinkedIn", name: "linkedin_url", widget: "string" }
+          - { label: "Photo de couverture", name: "cover_image", widget: "image" }

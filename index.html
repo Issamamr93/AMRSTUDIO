@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Issam Amer — AMR Studio</title>
+  <meta name="description" content="Portfolio d'Issam Amer — jeune photographe français. Street, voyages, portraits et tout le reste." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Issam Amer — AMR Studio" />
+  <meta property="og:description" content="Photographe autodidacte basé en Suisse — entre Bali, Chamonix, Kuala Lumpur et les Alpes. Un œil curieux sur le monde." />
+  <meta property="og:image" content="couverture.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Issam Amer — AMR Studio" />
+  <meta name="twitter:description" content="Photographe autodidacte basé en Suisse — entre Bali, Chamonix, Kuala Lumpur et les Alpes." />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Barre de progression de défilement -->
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="top-nav" id="top-nav">
+    <div class="top-nav-inner">
+      <div class="top-nav-brand">Issam Amer — AMR Studio</div>
+      <nav class="top-nav-links" id="top-nav-links" role="navigation" aria-label="Navigation principale">
+        <button class="link-button top-nav-link" data-target="hero" type="button">Accueil</button>
+        <button class="link-button top-nav-link" data-target="overview" type="button">Aperçu</button>
+        <button class="link-button top-nav-link" data-target="themes" type="button">Thèmes</button>
+        <button class="link-button top-nav-link" data-target="contact" type="button">Me contacter</button>
+      </nav>
+      <button class="dark-toggle" id="dark-toggle" type="button" aria-label="Basculer le thème sombre" title="Mode sombre"></button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="top-nav-links" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-media">
+        <img
+          src="couverture.jpg"
+          alt="Photographie de couverture — Issam Amer"
+          class="hero-image"
+        />
+      </div>
+      <div class="hero-content">
+        <div class="hero-name">Issam Amer</div>
+        <p class="hero-kicker">Photographe</p>
+        <h1 class="hero-title">AMR Studio</h1>
+        <p class="hero-subtitle">
+          Jeune photographe français. Je photographie ce qui m'entoure —
+          mes voyages, la rue, les gens, les instants. Pas de spécialité,
+          juste un œil et un appareil.
+        </p>
+        <button id="open-collection" class="hero-button" type="button">
+          Voir les photos
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content" class="main">
+
+    <!-- Aperçu -->
+    <section class="home-overview" id="overview">
+      <div class="home-overview-text">
+        <h2>Ce que j'ai capturé</h2>
+        <p>
+          Des voyages, de la street, des moments du quotidien.
+          Certaines photos viennent de loin, d'autres d'à côté.
+          Clique sur une image pour voir la galerie.
+        </p>
+      </div>
+      <div class="home-overview-grid">
+        <button class="home-overview-thumb" data-theme="suisse" data-title="Suisse" type="button" aria-label="Ouvrir la galerie Suisse">
+          <img src="assets/voyages/suisse/IMG_5384.JPG" alt="Aperçu Suisse" loading="lazy" />
+        </button>
+        <button class="home-overview-thumb" data-theme="ldc" data-title="LDC" type="button" aria-label="Ouvrir la galerie LDC">
+          <img src="assets/voyages/ldc/ldc.jpg" alt="Aperçu LDC" loading="lazy" />
+        </button>
+        <button class="home-overview-thumb" data-theme="indonesie" data-title="Indonésie" type="button" aria-label="Ouvrir la galerie Indonésie">
+          <img src="assets/voyages/indonesie/3-DSC02752.jpg" alt="Aperçu Indonésie" loading="lazy" />
+        </button>
+        <button class="home-overview-thumb" data-theme="chamonix" data-title="Chamonix" type="button" aria-label="Ouvrir la galerie Chamonix">
+          <img src="assets/voyages/chamonix/DSC03014.jpg" alt="Aperçu Chamonix" loading="lazy" />
+        </button>
+        <button class="home-overview-thumb" data-theme="malaisie" data-title="Malaisie" type="button" aria-label="Ouvrir la galerie Malaisie">
+          <img src="assets/voyages/malaisie/DSC02529.jpg" alt="Aperçu Malaisie" loading="lazy" />
+        </button>
+      </div>
+    </section>
+
+    <!-- Thèmes -->
+    <section class="themes" id="themes">
+      <article
+        class="theme-card"
+        data-theme="chamonix"
+        data-title="Chamonix"
+        data-count="4"
+        tabindex="0"
+        role="button"
+        aria-label="Ouvrir la galerie Chamonix — 4 photos"
+      >
+        <img src="assets/voyages/chamonix/DSC02965.jpg" alt="Chamonix" loading="lazy" />
+        <div class="theme-overlay">
+          <span class="theme-title">Chamonix</span>
+          <span class="theme-tagline">Alpes — France</span>
+          <span class="theme-count">4 photos</span>
+        </div>
+      </article>
+
+      <article
+        class="theme-card"
+        data-theme="suisse"
+        data-title="Suisse"
+        data-count="7"
+        tabindex="0"
+        role="button"
+        aria-label="Ouvrir la galerie Suisse — 7 photos"
+      >
+        <img src="assets/voyages/suisse/cascade.jpg" alt="Suisse" loading="lazy" />
+        <div class="theme-overlay">
+          <span class="theme-title">Suisse</span>
+          <span class="theme-tagline">Alpes bernoises</span>
+          <span class="theme-count">7 photos</span>
+        </div>
+      </article>
+
+      <article
+        class="theme-card"
+        data-theme="indonesie"
+        data-title="Indonésie"
+        data-count="7"
+        tabindex="0"
+        role="button"
+        aria-label="Ouvrir la galerie Indonésie — 7 photos"
+      >
+        <img src="assets/voyages/indonesie/4-DSC02723.jpg" alt="Indonésie" loading="lazy" />
+        <div class="theme-overlay">
+          <span class="theme-title">Indonésie</span>
+          <span class="theme-tagline">Bali</span>
+          <span class="theme-count">7 photos</span>
+        </div>
+      </article>
+
+      <article
+        class="theme-card"
+        data-theme="malaisie"
+        data-title="Malaisie"
+        data-count="5"
+        tabindex="0"
+        role="button"
+        aria-label="Ouvrir la galerie Malaisie — 5 photos"
+      >
+        <img src="assets/voyages/malaisie/DSC02487.jpg" alt="Malaisie" loading="lazy" />
+        <div class="theme-overlay">
+          <span class="theme-title">Malaisie</span>
+          <span class="theme-tagline">Malaisie péninsulaire</span>
+          <span class="theme-count">5 photos</span>
+        </div>
+      </article>
+
+      <article
+        class="theme-card"
+        data-theme="ldc"
+        data-title="LDC"
+        data-count="3"
+        tabindex="0"
+        role="button"
+        aria-label="Ouvrir la galerie LDC — 3 photos"
+      >
+        <img src="assets/voyages/ldc/ldc2.jpg" alt="LDC" loading="lazy" />
+        <div class="theme-overlay">
+          <span class="theme-title">LDC</span>
+          <span class="theme-tagline">Street</span>
+          <span class="theme-count">3 photos</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Galerie masonry -->
+    <section id="gallery-view" class="gallery-view hidden">
+      <div class="gallery-header">
+        <button id="back-to-themes" class="link-button" type="button">
+          ← Retour aux thèmes
+        </button>
+        <div class="gallery-header-right">
+          <h2 id="gallery-title"></h2>
+          <p id="gallery-subtitle" class="gallery-subtitle"></p>
+        </div>
+      </div>
+      <div id="gallery-grid" class="gallery-grid">
+        <!-- Images injectées en JS -->
+      </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer class="footer" id="contact">
+      <div class="footer-top">
+        <div class="footer-identity">
+          <p class="footer-name">Issam Amer</p>
+          <p class="footer-tagline">Photographe.</p>
+          <p class="footer-text">
+            Jeune photographe français, je shoote ce qui me plaît —
+            en voyage comme en bas de chez moi. Street, portraits,
+            paysages. Toujours partant pour un projet.
+          </p>
+        </div>
+
+        <nav class="footer-links" aria-label="Liens de contact">
+          <a href="mailto:issamer932@gmail.com">issamer932@gmail.com</a>
+          <a href="https://www.instagram.com/qr/" target="_blank" rel="noreferrer noopener">Instagram</a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener">LinkedIn</a>
+          <button id="contact-toggle" class="link-button" type="button" aria-expanded="false" aria-controls="contact-form-wrapper">
+            Me contacter
+          </button>
+        </nav>
+      </div>
+
+      <div id="contact-form-wrapper" class="contact-form-wrapper hidden">
+        <form class="contact-form" autocomplete="off" novalidate>
+          <div class="form-row">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" required autocomplete="name" />
+          </div>
+
+          <div class="form-row">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+          </div>
+
+          <div class="form-row">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Votre projet, une collaboration, une question…"></textarea>
+          </div>
+
+          <button type="submit" class="link-button form-submit">Envoyer le message</button>
+
+          <div id="form-success" class="form-success" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy">© <span id="footer-year"></span> Issam Amer. Tous droits réservés.</span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Bouton retour en haut -->
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Retour en haut">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Curseur custom "Explorer" -->
+  <div id="explore-cursor" class="explore-cursor" aria-hidden="true">Explorer</div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image agrandie" hidden>
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Fermer">✕</button>
+    <button class="lightbox-prev" id="lightbox-prev" type="button" aria-label="Image précédente">‹</button>
+    <button class="lightbox-next" id="lightbox-next" type="button" aria-label="Image suivante">›</button>
+    <div class="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
+    <div class="lightbox-caption" id="lightbox-caption" aria-live="polite"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', function(user) {
+        if (!user) {
+          window.netlifyIdentity.on('login', function() {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

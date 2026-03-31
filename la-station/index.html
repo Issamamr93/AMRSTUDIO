@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Station – Vainqueur Coupe de France du Burger 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Roboto+Slab:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:   #0d0d0d;
+      --dark:    #1a1a1a;
+      --card:    #222222;
+      --orange:  #e07b2a;
+      --amber:   #f5a623;
+      --cream:   #f5f0e8;
+      --white:   #ffffff;
+      --grey:    #888888;
+      --red:     #c0392b;
+      --green:   #2e7d32;
+      --r: .75rem;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Scrollbar ──────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+    /* ── Utility ────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .section-title span { color: var(--orange); }
+    .divider {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--amber));
+      border-radius: 2px;
+      margin: .75rem 0 2rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: .25rem .8rem;
+      border-radius: 20px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .badge-spicy  { background: var(--red);   color: #fff; }
+    .badge-new    { background: var(--amber);  color: #000; }
+    .badge-veggie { background: var(--green);  color: #fff; }
+    .badge-star   { background: var(--orange); color: #fff; }
+    .price-tag {
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--amber);
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 1rem 0;
+      transition: background .4s, backdrop-filter .4s, box-shadow .4s;
+    }
+    #navbar.scrolled {
+      background: rgba(13,13,13,.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(224,123,42,.15);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .nav-logo-circle {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900; font-size: 1rem;
+      color: #fff; letter-spacing: .05em;
+      border: 2px solid var(--amber);
+      position: relative;
+      box-shadow: 0 0 0 3px rgba(224,123,42,.2);
+    }
+    .nav-logo-circle::before {
+      content: '';
+      position: absolute; inset: 3px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,.4);
+    }
+    .nav-logo-text { font-family: 'Roboto Slab', serif; font-weight: 700; font-size: 1.1rem; }
+    .nav-logo-text small { display: block; font-size: .65rem; color: var(--orange); letter-spacing: .1em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .85rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--cream); transition: color .25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 2px; background: var(--orange);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--orange);
+      color: #fff; font-weight: 700; font-size: .85rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: .65rem 1.6rem; border-radius: 30px;
+      border: 2px solid transparent;
+      transition: background .3s, border-color .3s, transform .2s;
+    }
+    .nav-cta:hover {
+      background: transparent;
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
+    .nav-burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 2px; transition: .3s; }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 65% 50%, rgba(224,123,42,.08) 0%, transparent 70%),
+        linear-gradient(135deg, #0d0d0d 0%, #1a1205 60%, #0d0d0d 100%);
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(224,123,42,.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-burger-glow {
+      position: absolute; right: 0; top: 0; width: 58%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-burger-visual {
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center,
+        rgba(224,123,42,.22) 0%,
+        rgba(245,166,35,.08) 45%,
+        transparent 70%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%,100% { box-shadow: 0 0 60px rgba(224,123,42,.2); }
+      50%      { box-shadow: 0 0 120px rgba(224,123,42,.4); }
+    }
+    .hero-burger-emoji {
+      font-size: 14rem;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,.8));
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(-3deg); }
+      50%      { transform: translateY(-20px) rotate(3deg); }
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 55%; }
+    .hero-champion-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(224,123,42,.15);
+      border: 1px solid rgba(224,123,42,.4);
+      border-radius: 30px;
+      padding: .4rem 1rem;
+      font-size: .8rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: 1.5rem;
+    }
+    .hero-champion-badge::before { content: '🏆'; font-size: 1rem; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title .accent { color: var(--orange); display: block; }
+    .hero-subtitle {
+      font-size: 1.1rem; color: rgba(245,240,232,.7);
+      max-width: 480px; margin-bottom: 2.5rem; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--orange);
+      color: #fff; font-weight: 700; font-size: .95rem;
+      letter-spacing: .04em; text-transform: uppercase;
+      padding: 1rem 2.2rem; border-radius: 30px;
+      border: 2px solid var(--orange);
+      transition: all .3s; cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: transparent; color: var(--orange);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(224,123,42,.3);
+    }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: transparent;
+      color: var(--cream); font-weight: 600; font-size: .9rem;
+      letter-spacing: .04em; text-transform: uppercase;
+      padding: 1rem 2rem; border-radius: 30px;
+      border: 2px solid rgba(245,240,232,.3);
+      transition: all .3s; cursor: pointer;
+    }
+    .btn-outline:hover {
+      border-color: var(--orange); color: var(--orange);
+      transform: translateY(-3px);
+    }
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+    }
+    .hero-stat { display: flex; align-items: center; gap: .75rem; }
+    .hero-stat-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(224,123,42,.12);
+      border: 1px solid rgba(224,123,42,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .hero-stat-text strong { display: block; font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .hero-stat-text span { font-size: .72rem; color: var(--grey); letter-spacing: .06em; text-transform: uppercase; }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey);
+      animation: bounce 2s ease-in-out infinite;
+      cursor: pointer;
+    }
+    .hero-scroll-arrow {
+      width: 24px; height: 24px;
+      border-right: 2px solid var(--orange);
+      border-bottom: 2px solid var(--orange);
+      transform: rotate(45deg);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── Quality Banner ─────────────────────────────────────── */
+    #quality-banner {
+      background: linear-gradient(90deg, rgba(224,123,42,.15) 0%, rgba(245,166,35,.1) 50%, rgba(224,123,42,.15) 100%);
+      border-top: 1px solid rgba(224,123,42,.2);
+      border-bottom: 1px solid rgba(224,123,42,.2);
+      padding: 1.2rem 0;
+    }
+    .quality-items {
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .quality-item {
+      display: flex; align-items: center; gap: .75rem;
+      font-weight: 700; font-size: .85rem;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .quality-item .qi-icon { font-size: 1.5rem; }
+    .quality-item .qi-text { color: var(--cream); }
+    .quality-item .qi-text small { display: block; color: var(--orange); font-size: .7rem; }
+    .quality-sep { color: rgba(224,123,42,.3); font-size: 1.5rem; }
+
+    /* ── Signature ──────────────────────────────────────────── */
+    #signature {
+      padding: 6rem 0;
+    }
+    .signature-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .signature-visual {
+      position: relative; border-radius: 1.5rem; overflow: hidden;
+    }
+    .signature-burger-display {
+      background: linear-gradient(145deg, #1a1205, #2a1a08);
+      border: 1px solid rgba(224,123,42,.2);
+      border-radius: 1.5rem;
+      padding: 3rem;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+    .signature-burger-display::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(224,123,42,.12), transparent 70%);
+    }
+    .sig-burger-emoji {
+      font-size: 10rem;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,.8));
+      position: relative; z-index: 1;
+    }
+    .signature-champion-ribbon {
+      position: absolute; top: 1.5rem; left: -2.5rem;
+      background: var(--orange);
+      color: #fff; font-weight: 700; font-size: .75rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .4rem 3rem;
+      transform: rotate(-30deg);
+      box-shadow: 0 4px 12px rgba(0,0,0,.4);
+    }
+    .signature-stars {
+      position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: .3rem; z-index: 2;
+    }
+    .signature-stars span { color: var(--amber); font-size: 1.3rem; }
+    .signature-content {}
+    .signature-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: var(--orange); font-size: .8rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .signature-eyebrow::before { content: '★'; }
+    .signature-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.1; margin-bottom: .5rem;
+    }
+    .signature-subtitle {
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.1rem; color: var(--orange);
+      margin-bottom: 1.5rem;
+    }
+    .signature-desc {
+      color: rgba(245,240,232,.7); line-height: 1.8; margin-bottom: 2rem;
+    }
+    .signature-ingredients {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem;
+    }
+    .ingredient-chip {
+      background: rgba(224,123,42,.1);
+      border: 1px solid rgba(224,123,42,.25);
+      border-radius: 20px;
+      padding: .3rem .9rem;
+      font-size: .78rem; font-weight: 600; color: var(--cream);
+    }
+    .signature-price-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1rem;
+    }
+    .signature-price-info {}
+    .signature-price-label { font-size: .72rem; color: var(--grey); text-transform: uppercase; letter-spacing: .08em; }
+    .signature-price-value { font-family: 'Roboto Slab', serif; font-size: 2rem; font-weight: 700; color: var(--amber); }
+
+    /* ── Menu Sections ──────────────────────────────────────── */
+    #menu { padding: 6rem 0; background: var(--dark); }
+    .menu-header { text-align: center; margin-bottom: 3rem; }
+    .menu-tabs {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem;
+      margin-bottom: 3rem;
+    }
+    .tab-btn {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      color: var(--grey);
+      font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      padding: .65rem 1.5rem; border-radius: 25px; cursor: pointer;
+      transition: all .3s;
+    }
+    .tab-btn:hover { border-color: var(--orange); color: var(--cream); }
+    .tab-btn.active {
+      background: var(--orange); border-color: var(--orange);
+      color: #fff; box-shadow: 0 4px 20px rgba(224,123,42,.3);
+    }
+    .menu-section { display: none; }
+    .menu-section.active { display: block; }
+    .menu-section-title {
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--orange); text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .menu-section-title::after {
+      content: ''; flex: 1; height: 1px; background: rgba(224,123,42,.2);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .menu-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      position: relative; overflow: hidden;
+    }
+    .menu-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .menu-card:hover { transform: translateY(-4px); border-color: rgba(224,123,42,.3); box-shadow: 0 12px 30px rgba(0,0,0,.4); }
+    .menu-card:hover::before { opacity: 1; }
+    .menu-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; margin-bottom: .75rem; }
+    .menu-card-name { font-family: 'Roboto Slab', serif; font-weight: 700; font-size: 1rem; color: var(--white); }
+    .menu-card-badges { display: flex; gap: .3rem; flex-wrap: wrap; margin-bottom: .5rem; }
+    .menu-card-desc { font-size: .82rem; color: var(--grey); line-height: 1.6; margin-bottom: 1rem; }
+    .menu-card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .add-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(224,123,42,.15); border: 1px solid rgba(224,123,42,.4);
+      color: var(--orange); font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .3s;
+    }
+    .add-btn:hover { background: var(--orange); color: #fff; transform: scale(1.1); }
+
+    /* ── Hot Dogs ───────────────────────────────────────────── */
+    .hotdog-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem;
+    }
+    .hotdog-item {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r); padding: 1.25rem;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+      transition: transform .3s, border-color .3s;
+    }
+    .hotdog-item:hover { transform: translateX(4px); border-color: rgba(224,123,42,.3); }
+    .hotdog-info { flex: 1; }
+    .hotdog-name { font-family: 'Roboto Slab', serif; font-weight: 700; font-size: .95rem; color: var(--white); margin-bottom: .3rem; }
+    .hotdog-desc { font-size: .78rem; color: var(--grey); }
+
+    /* ── Steakhouse ─────────────────────────────────────────── */
+    .steak-cards {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;
+    }
+    .steak-card {
+      background: linear-gradient(135deg, #1e1208, #2a1a08);
+      border: 1px solid rgba(224,123,42,.2);
+      border-radius: var(--r); padding: 2rem;
+      text-align: center; position: relative; overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .steak-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.5); }
+    .steak-card-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    .steak-card-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: .5rem; }
+    .steak-card-cut { font-size: .78rem; color: var(--orange); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1rem; }
+    .steak-card-desc { font-size: .82rem; color: var(--grey); line-height: 1.6; margin-bottom: 1.5rem; }
+    .steak-card-price { font-family: 'Roboto Slab', serif; font-size: 1.5rem; font-weight: 700; color: var(--amber); }
+
+    /* ── Desserts ───────────────────────────────────────────── */
+    #desserts { padding: 6rem 0; }
+    .desserts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .dessert-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .dessert-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,.4); }
+    .dessert-visual {
+      height: 150px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      background: linear-gradient(135deg, #1a1205, #2a1a08);
+    }
+    .dessert-info { padding: 1.2rem; }
+    .dessert-name { font-family: 'Roboto Slab', serif; font-weight: 700; font-size: .95rem; color: var(--white); margin-bottom: .3rem; }
+    .dessert-desc { font-size: .78rem; color: var(--grey); margin-bottom: .75rem; }
+
+    /* ── Boissons ───────────────────────────────────────────── */
+    #boissons { padding: 6rem 0; background: var(--dark); }
+    .boissons-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem;
+    }
+    .boisson-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r); padding: 1.5rem;
+      text-align: center;
+      transition: transform .3s, border-color .3s;
+    }
+    .boisson-card:hover { transform: translateY(-4px); border-color: rgba(224,123,42,.3); }
+    .boisson-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .boisson-cat { font-size: .7rem; color: var(--orange); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem; }
+    .boisson-name { font-family: 'Roboto Slab', serif; font-weight: 700; color: var(--white); margin-bottom: .3rem; }
+    .boisson-desc { font-size: .78rem; color: var(--grey); margin-bottom: .75rem; }
+
+    /* ── About / Champion ───────────────────────────────────── */
+    #about { padding: 7rem 0; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .about-trophy {
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+    }
+    .trophy-display {
+      width: 280px; height: 280px; border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(224,123,42,.25), rgba(13,13,13,.8));
+      border: 2px solid rgba(224,123,42,.3);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .5rem;
+      box-shadow: 0 0 60px rgba(224,123,42,.15), inset 0 0 60px rgba(0,0,0,.4);
+      animation: trophy-pulse 3s ease-in-out infinite;
+    }
+    @keyframes trophy-pulse {
+      0%,100% { box-shadow: 0 0 60px rgba(224,123,42,.15), inset 0 0 60px rgba(0,0,0,.4); }
+      50%      { box-shadow: 0 0 100px rgba(224,123,42,.35), inset 0 0 60px rgba(0,0,0,.4); }
+    }
+    .trophy-emoji { font-size: 5rem; }
+    .trophy-title { font-family: 'Roboto Slab', serif; font-size: 1.1rem; font-weight: 700; color: var(--amber); text-align: center; }
+    .trophy-year { font-size: 2.5rem; font-weight: 900; color: var(--orange); font-family: 'Playfair Display', serif; }
+    .trophy-desc { font-size: .78rem; color: var(--grey); letter-spacing: .08em; text-transform: uppercase; }
+    .about-content {}
+    .about-content .section-title { margin-bottom: .5rem; }
+    .about-lead { font-size: 1.05rem; color: rgba(245,240,232,.8); line-height: 1.8; margin-bottom: 2rem; }
+    .about-features { list-style: none; margin-bottom: 2.5rem; }
+    .about-features li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: .75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: .9rem; color: rgba(245,240,232,.75);
+    }
+    .about-features li .af-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(224,123,42,.12);
+      border: 1px solid rgba(224,123,42,.25);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-top: -.1rem;
+    }
+
+    /* ── Contact ────────────────────────────────────────────── */
+    #contact { padding: 6rem 0; background: var(--dark); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+    .contact-info h2 { margin-bottom: 1rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r);
+      transition: border-color .3s;
+    }
+    .contact-item:hover { border-color: rgba(224,123,42,.3); }
+    .contact-item-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(224,123,42,.1);
+      border: 1px solid rgba(224,123,42,.25);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .contact-item-text strong { display: block; font-size: .82rem; color: var(--orange); letter-spacing: .06em; text-transform: uppercase; margin-bottom: .25rem; }
+    .contact-item-text span { font-size: .9rem; color: var(--cream); }
+    .hours-grid {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r);
+      padding: 2rem;
+    }
+    .hours-grid h3 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.1rem; color: var(--white); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .hours-grid h3::before { content: '🕐'; }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid rgba(255,255,255,.06); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td { padding: .75rem 0; font-size: .88rem; }
+    .hours-table td:first-child { color: var(--grey); width: 40%; }
+    .hours-table td:last-child { color: var(--cream); text-align: right; }
+    .hours-table .closed { color: var(--red) !important; }
+    .hours-table .highlight td { color: var(--amber); }
+    .map-placeholder {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r);
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: .75rem;
+      font-size: .85rem; color: var(--grey);
+      cursor: pointer; transition: border-color .3s;
+    }
+    .map-placeholder:hover { border-color: rgba(224,123,42,.4); }
+    .map-placeholder .map-icon { font-size: 2.5rem; }
+    .map-placeholder a { color: var(--orange); font-weight: 600; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 3rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;
+      margin-bottom: 2rem;
+    }
+    .footer-brand .nav-logo-circle { width: 56px; height: 56px; font-size: 1.1rem; margin-bottom: 1rem; }
+    .footer-brand-name { font-family: 'Roboto Slab', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); }
+    .footer-brand-tagline { font-size: .82rem; color: var(--grey); margin-top: .25rem; margin-bottom: 1rem; }
+    .footer-brand-desc { font-size: .82rem; color: var(--grey); line-height: 1.7; max-width: 300px; }
+    .footer-col-title { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .footer-links a { font-size: .85rem; color: var(--grey); transition: color .25s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-social { display: flex; gap: .75rem; margin-top: 1rem; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--grey);
+      transition: all .3s; cursor: pointer;
+    }
+    .social-btn:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      font-size: .78rem; color: var(--grey);
+    }
+    .footer-bottom a { color: var(--grey); transition: color .25s; }
+    .footer-bottom a:hover { color: var(--orange); }
+
+    /* ── Mobile Menu ────────────────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(13,13,13,.98);
+      backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.8rem; font-weight: 700; color: var(--cream);
+      transition: color .25s;
+    }
+    .mobile-nav a:hover { color: var(--orange); }
+    .mobile-nav-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-size: 2rem; color: var(--grey); cursor: pointer; transition: color .25s;
+    }
+    .mobile-nav-close:hover { color: var(--orange); }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .hero-content { max-width: 100%; }
+      .hero-burger-glow { display: none; }
+      .hero-title { font-size: 3rem; }
+      .signature-grid, .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-trophy { order: -1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .quality-sep { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Animations ─────────────────────────────────────────── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-circle">LS</div>
+        <div class="nav-logo-text">
+          La Station
+          <small>Burger · Steakhouse</small>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#signature">Signature</a></li>
+        <li><a href="#menu">La Carte</a></li>
+        <li><a href="#desserts">Desserts</a></li>
+        <li><a href="#about">Notre Histoire</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="tel:0134053475" class="nav-cta">📞 Réserver</a>
+      <div class="nav-burger" id="nav-burger-btn" role="button" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <span class="mobile-nav-close" id="mobile-nav-close">✕</span>
+  <a href="#signature" class="mobile-link">Signature</a>
+  <a href="#menu" class="mobile-link">La Carte</a>
+  <a href="#desserts" class="mobile-link">Desserts</a>
+  <a href="#about" class="mobile-link">Notre Histoire</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- ══ HERO ════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-burger-glow">
+    <div class="hero-burger-visual">
+      <div class="hero-burger-emoji">🍔</div>
+    </div>
+  </div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="hero-content">
+      <div class="hero-champion-badge">Vainqueur IDF · Coupe de France du Burger 2025</div>
+      <h1 class="hero-title">
+        L'Excellence<br>
+        <span class="accent">du Burger</span><br>
+        Médaillée
+      </h1>
+      <p class="hero-subtitle">
+        La Station, vainqueur Île-de-France de la Coupe de France du Burger 2025.
+        100&nbsp;% frais, pain brioché maison, viande sélectionnée — chaque burger est une œuvre.
+      </p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary">🍔 Découvrir la Carte</a>
+        <a href="#contact" class="btn-outline">📍 Nous trouver</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-icon">🏆</div>
+          <div class="hero-stat-text">
+            <strong>#1 IDF</strong>
+            <span>Coupe de France 2025</span>
+          </div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-icon">🥩</div>
+          <div class="hero-stat-text">
+            <strong>100 % Frais</strong>
+            <span>Viande & pain du jour</span>
+          </div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-icon">🍟</div>
+          <div class="hero-stat-text">
+            <strong>Frites Maison</strong>
+            <span>Fraîches à chaque service</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('quality-banner').scrollIntoView({behavior:'smooth'})">
+    <span>Défiler</span>
+    <div class="hero-scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ══ QUALITY BANNER ══════════════════════════════════════ -->
+<div id="quality-banner">
+  <div class="container">
+    <div class="quality-items">
+      <div class="quality-item"><span class="qi-icon">🥩</span><div class="qi-text">Viande Fraîche<small>Sélection quotidienne</small></div></div>
+      <span class="quality-sep">|</span>
+      <div class="quality-item"><span class="qi-icon">🍞</span><div class="qi-text">Pain Frais<small>Brioché maison</small></div></div>
+      <span class="quality-sep">|</span>
+      <div class="quality-item"><span class="qi-icon">🥗</span><div class="qi-text">Salades Fraîches<small>Du marché</small></div></div>
+      <span class="quality-sep">|</span>
+      <div class="quality-item"><span class="qi-icon">🍟</span><div class="qi-text">Frites Maison<small>Coupées à la main</small></div></div>
+      <span class="quality-sep">|</span>
+      <div class="quality-item"><span class="qi-icon">⭐</span><div class="qi-text">Speak Frais<small>Garantie fraîcheur</small></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BURGER SIGNATURE ═════════════════════════════════════ -->
+<section id="signature">
+  <div class="container">
+    <div class="signature-grid fade-in">
+      <div class="signature-visual">
+        <div class="signature-burger-display">
+          <div class="signature-champion-ribbon">Champion 2025</div>
+          <div class="sig-burger-emoji">🍔</div>
+          <div class="signature-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+        </div>
+      </div>
+      <div class="signature-content">
+        <span class="signature-eyebrow">Notre Burger Signature</span>
+        <h2 class="signature-name">Le Tissot<br>Varenne</h2>
+        <p class="signature-subtitle">Vainqueur IDF · Coupe de France du Burger</p>
+        <p class="signature-desc">
+          Notre burger champion, fruit d'une passion absolue pour le goût et la qualité.
+          Pain brioché maison toasté, steak haché sélectionné 180&nbsp;g,
+          fromage fondant, garnitures fraîches du jour — un équilibre parfait entre
+          puissance et finesse qui a conquis le jury national.
+        </p>
+        <div class="signature-ingredients">
+          <span class="ingredient-chip">🥩 Steak 180g</span>
+          <span class="ingredient-chip">🧀 Fromage fondant</span>
+          <span class="ingredient-chip">🥬 Salade fraîche</span>
+          <span class="ingredient-chip">🍅 Tomate</span>
+          <span class="ingredient-chip">🧅 Oignons caramélisés</span>
+          <span class="ingredient-chip">🥚 Sauce maison</span>
+          <span class="ingredient-chip">🍞 Pain brioché</span>
+        </div>
+        <div class="signature-price-row">
+          <div class="signature-price-info">
+            <div class="signature-price-label">Prix</div>
+            <div class="signature-price-value">À partir de 14€</div>
+          </div>
+          <a href="tel:0134053475" class="btn-primary">Commander</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MENU ═════════════════════════════════════════════════ -->
+<section id="menu">
+  <div class="container">
+    <div class="menu-header fade-in">
+      <h2 class="section-title">La <span>Carte</span></h2>
+      <div class="divider"></div>
+      <p style="color:var(--grey);max-width:560px;margin:0 auto;">
+        Des burgers artisanaux, des hot-dogs généreux, un steakhouse de caractère —
+        une carte pensée pour satisfaire toutes les envies.
+      </p>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" data-tab="burgers">🍔 Burgers</button>
+      <button class="tab-btn" data-tab="hotdogs">🌭 Hot Dogs & Bagels</button>
+      <button class="tab-btn" data-tab="steakhouse">🥩 Steakhouse</button>
+      <button class="tab-btn" data-tab="starters">🍗 Starters & Salades</button>
+    </div>
+
+    <!-- Burgers -->
+    <div class="menu-section active" id="tab-burgers">
+      <div class="menu-section-title">⭐ Les Stars</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-card-header">
+            <div class="menu-card-name">Le Tissot Varenne</div>
+            <div class="price-tag">Signature</div>
+          </div>
+          <div class="menu-card-badges"><span class="badge badge-star">Champion IDF</span></div>
+          <p class="menu-card-desc">Notre burger primé — steak 180g, fromage fondant, garnitures maison, pain brioché toasté. L'expérience ultime.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 14€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">La Station</div></div>
+          <div class="menu-card-badges"><span class="badge badge-star">Incontournable</span></div>
+          <p class="menu-card-desc">Le burger maison par excellence — bacon, cheddar, salade, tomate, cornichons, sauce La Station exclusive.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 13€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Brooklyn</div></div>
+          <div class="menu-card-badges"><span class="badge badge-new">Gourmand</span></div>
+          <p class="menu-card-desc">2 steaks 120g, double cheddar, bacon croustillant, oignons frits, sauce BBQ maison — pour les grands appétits.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 14€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+      </div>
+
+      <div class="menu-section-title">🧀 Les Fromagers</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Queens</div></div>
+          <p class="menu-card-desc">Steak 150g, double cheddar fondu, salade, tomate, oignons, sauce spéciale fromagère.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 13€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Little Italy</div></div>
+          <p class="menu-card-desc">Steak 150g, mozzarella fondante, pesto basilic, roquette, tomates confites, parmesan.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 13€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Honey Goat</div></div>
+          <p class="menu-card-desc">Steak 150g, fromage de chèvre, miel, noix caramélisées, roquette, oignons confits.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 13€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Blue Cheese</div></div>
+          <p class="menu-card-desc">Steak 150g, roquefort coulant, poire, noix, céleri, sauce au bleu maison.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 13€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Montagnard</div></div>
+          <p class="menu-card-desc">Steak 150g, tome de Savoie, bacon fumé, reblochon fondu, champignons sautés.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 14€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+      </div>
+
+      <div class="menu-section-title">🌶️ Les Spicy</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Chicken Crispy</div></div>
+          <div class="menu-card-badges"><span class="badge badge-spicy">Spicy</span></div>
+          <p class="menu-card-desc">Blanc de poulet pané croustillant, sauce sriracha mayo, coleslaw pimenté, pickles jalapeños.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 13€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Santa Cruz</div></div>
+          <div class="menu-card-badges"><span class="badge badge-spicy">Très Épicé</span></div>
+          <p class="menu-card-desc">Steak 150g, piment de la pepperoncini, sauce chipotle fumée, cheddar, oignons croustillants.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 13€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+      </div>
+
+      <div class="menu-section-title">🌿 Fish & Veggie</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Fish</div></div>
+          <div class="menu-card-badges"><span class="badge badge-veggie">Poisson</span></div>
+          <p class="menu-card-desc">Filet de poisson croustillant, sauce tartare maison, salade iceberg, tomate, citron.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 12€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Veggie</div></div>
+          <div class="menu-card-badges"><span class="badge badge-veggie">Végétarien</span></div>
+          <p class="menu-card-desc">Steak végétal maison, chèvre frais, avocat, pousses d'épinards, tomates séchées, sauce verte.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 12€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+      </div>
+
+      <div class="menu-section-title">🍟 French Fries Top Secret</div>
+      <div style="background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:1.5rem;margin-bottom:1.5rem;">
+        <p style="color:var(--grey);font-size:.85rem;margin-bottom:1rem;">Ajoutez des extras à vos frites — chaque topping est à <strong style="color:var(--amber);">+1€</strong></p>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+          <span class="ingredient-chip">🧀 Cheddar fondu</span>
+          <span class="ingredient-chip">🥓 Bacon bits</span>
+          <span class="ingredient-chip">🧅 Oignons frits</span>
+          <span class="ingredient-chip">🌶️ Jalapeños</span>
+          <span class="ingredient-chip">🥫 Sauce BBQ</span>
+          <span class="ingredient-chip">Chili con Carne</span>
+        </div>
+        <div style="margin-top:1.5rem;display:flex;justify-content:space-between;align-items:center;">
+          <div><span style="color:var(--grey);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;">Dossier Frites Maison</span><div class="price-tag" style="margin-top:.2rem;">3,90 €</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hot Dogs & Bagels -->
+    <div class="menu-section" id="tab-hotdogs">
+      <div class="menu-section-title">🌭 Les Hot Dogs</div>
+      <div class="hotdog-grid">
+        <div class="hotdog-item">
+          <div class="hotdog-info">
+            <div class="hotdog-name">Chicago</div>
+            <div class="hotdog-desc">Pain hot-dog, saucisse fumée, moutarde, relish, oignons, tomate, cornichons</div>
+          </div>
+          <span class="price-tag">≈ 9€</span>
+        </div>
+        <div class="hotdog-item">
+          <div class="hotdog-info">
+            <div class="hotdog-name">Miami</div>
+            <div class="hotdog-desc">Pain hot-dog, saucisse, sauce fromage, jalapeños, oignons croustillants</div>
+          </div>
+          <span class="price-tag">≈ 9€</span>
+        </div>
+        <div class="hotdog-item">
+          <div class="hotdog-info">
+            <div class="hotdog-name">New Yorkais</div>
+            <div class="hotdog-desc">Pain hot-dog, saucisse, ketchup, moutarde, choucroute, oignons sautés</div>
+          </div>
+          <span class="price-tag">≈ 9€</span>
+        </div>
+        <div class="hotdog-item">
+          <div class="hotdog-info">
+            <div class="hotdog-name">Coney Island</div>
+            <div class="hotdog-desc">Pain hot-dog, saucisse, chili con carne, cheddar, oignons, moutarde</div>
+          </div>
+          <span class="price-tag">≈ 10€</span>
+        </div>
+      </div>
+
+      <div class="menu-section-title" style="margin-top:2.5rem;">🥯 Les Bagels</div>
+      <div class="hotdog-grid">
+        <div class="hotdog-item">
+          <div class="hotdog-info">
+            <div class="hotdog-name">Buffalo</div>
+            <div class="hotdog-desc">Bagel grillé, poulet buffalo pané, sauce ranch, laitue, tomate, concombre</div>
+          </div>
+          <span class="price-tag">≈ 11€</span>
+        </div>
+        <div class="hotdog-item">
+          <div class="hotdog-info">
+            <div class="hotdog-name">Rome</div>
+            <div class="hotdog-desc">Bagel, cream cheese, saumon fumé, câpres, oignons rouges, aneth</div>
+          </div>
+          <span class="price-tag">≈ 12€</span>
+        </div>
+        <div class="hotdog-item">
+          <div class="hotdog-info">
+            <div class="hotdog-name">Crispy Tender</div>
+            <div class="hotdog-desc">Bagel, blanc de poulet croustillant, fromage fondu, salade, tomate, sauce maison</div>
+          </div>
+          <span class="price-tag">≈ 11€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Steakhouse -->
+    <div class="menu-section" id="tab-steakhouse">
+      <div class="menu-section-title">🥩 Steakhouse</div>
+      <div class="steak-cards">
+        <div class="steak-card">
+          <div class="steak-card-icon">🥩</div>
+          <div class="steak-card-name">Entrecôte</div>
+          <div class="steak-card-cut">Coupe premium · ~300g</div>
+          <p class="steak-card-desc">Entrecôte maturée sélectionnée, servie avec l'art de la cuisson selon vos préférences et nos sauces maison.</p>
+          <div class="steak-card-price">≈ 24€</div>
+        </div>
+        <div class="steak-card">
+          <div class="steak-card-icon">🍖</div>
+          <div class="steak-card-name">Filet de Poulet</div>
+          <div class="steak-card-cut">Filet entier · grillé</div>
+          <p class="steak-card-desc">Filet de poulet fermier grillé à la perfection, tendre et juteux, accompagné de vos accompagnements au choix.</p>
+          <div class="steak-card-price">≈ 18€</div>
+        </div>
+        <div class="steak-card">
+          <div class="steak-card-icon">🐄</div>
+          <div class="steak-card-name">Pièce du Boucher</div>
+          <div class="steak-card-cut">Sélection du chef · selon arrivage</div>
+          <p class="steak-card-desc">La pièce du moment choisie par notre chef — bavette, onglet, poire — selon l'arrivage et la saisonnalité.</p>
+          <div class="steak-card-price">Sur ardoise</div>
+        </div>
+      </div>
+      <div style="margin-top:2rem;background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:1.5rem;">
+        <div class="menu-section-title" style="font-size:.9rem;margin-bottom:1rem;">🍟 Accompagnements · Fish & Chips</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;">
+          <div style="font-size:.85rem;color:var(--grey);">🍟 Frites maison</div>
+          <div style="font-size:.85rem;color:var(--grey);">🥗 Salade du moment</div>
+          <div style="font-size:.85rem;color:var(--grey);">🫘 Haricots verts</div>
+          <div style="font-size:.85rem;color:var(--grey);">🧅 Oignons frits</div>
+          <div style="font-size:.85rem;color:var(--grey);">🐟 Fish & Chips (poisson panné)</div>
+          <div style="font-size:.85rem;color:var(--grey);">🧄 Sauce bearnaise maison</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Starters & Salades -->
+    <div class="menu-section" id="tab-starters">
+      <div class="menu-section-title">🍗 Les Starters</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Ailes de Poulet</div></div>
+          <p class="menu-card-desc">6 ailes marinées, sauce BBQ or buffalo, sauce ranch ou blue cheese.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 8€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Onion Rings</div></div>
+          <p class="menu-card-desc">Anneaux d'oignons panés croustillants, sauce mayo épicée maison.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 6€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Cheese Bites</div></div>
+          <p class="menu-card-desc">Bouchées de mozzarella fondantes panées, sauce tomate maison.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 7€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Sauce Gratuite</div></div>
+          <div class="menu-card-badges"><span class="badge badge-new">L'ART de la Cuisson</span></div>
+          <p class="menu-card-desc">Choisissez votre sauce parmi notre sélection maison : BBQ, Ranch, Béarnaise, Burger, Chipotle.</p>
+          <div class="menu-card-footer"><span class="price-tag">Offerte</span></div>
+        </div>
+      </div>
+
+      <div class="menu-section-title" style="margin-top:2rem;">🥗 Les Salades</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Nordique</div></div>
+          <p class="menu-card-desc">Saumon fumé, avocat, concombre, oignons rouges, câpres, aneth, vinaigrette citron.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 13€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Latina</div></div>
+          <p class="menu-card-desc">Poulet grillé, avocat, maïs, haricots noirs, tomates, coriandre, sauce tex-mex.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 12€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-card-header"><div class="menu-card-name">Roma</div></div>
+          <p class="menu-card-desc">Roquette, parmesan, tomates cerises, basilic, pignons, vinaigrette balsamique.</p>
+          <div class="menu-card-footer"><span class="price-tag">≈ 11€</span><button class="add-btn" title="Ajouter">+</button></div>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;background:linear-gradient(135deg,rgba(224,123,42,.08),rgba(224,123,42,.04));border:1px solid rgba(224,123,42,.2);border-radius:var(--r);padding:1.5rem;">
+        <div style="font-family:'Roboto Slab',serif;font-weight:700;color:var(--amber);margin-bottom:.75rem;font-size:.9rem;">⏰ Menu Midi — Disponible 11h–14h30</div>
+        <p style="font-size:.85rem;color:var(--grey);margin-bottom:.75rem;">1 Burger ou Hot Dog + 1 Boisson 33cl + 1 Sauce incluse = formule complète à prix réduit</p>
+        <p style="font-size:.78rem;color:rgba(245,240,232,.5);">Formule valable uniquement au déjeuner en semaine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DESSERTS ══════════════════════════════════════════════ -->
+<section id="desserts">
+  <div class="container">
+    <div class="menu-header fade-in">
+      <h2 class="section-title">Les <span>Desserts</span></h2>
+      <div class="divider"></div>
+      <p style="color:var(--grey);">Réalisés par notre pâtissier professionnel — une touche sucrée à la hauteur du repas.</p>
+    </div>
+    <div class="desserts-grid">
+      <div class="dessert-card fade-in">
+        <div class="dessert-visual">🍰</div>
+        <div class="dessert-info">
+          <div class="dessert-name">Original Cheesecake</div>
+          <div class="dessert-desc">Base biscuitée, crémeux fromage blanc, coulis de fruits rouges.</div>
+          <span class="price-tag">4,50€</span>
+        </div>
+      </div>
+      <div class="dessert-card fade-in">
+        <div class="dessert-visual">🍮</div>
+        <div class="dessert-info">
+          <div class="dessert-name">L'Onctueux Tiramisu</div>
+          <div class="dessert-desc">Recette traditionnelle, mascarpone aérien, café intense, cacao.</div>
+          <span class="price-tag">3,50€</span>
+        </div>
+      </div>
+      <div class="dessert-card fade-in">
+        <div class="dessert-visual">🎂</div>
+        <div class="dessert-info">
+          <div class="dessert-name">Le Tendre Moelleux</div>
+          <div class="dessert-desc">Gâteau coulant au chocolat noir, cœur fondant, glace vanille.</div>
+          <span class="price-tag">3,50€</span>
+        </div>
+      </div>
+      <div class="dessert-card fade-in">
+        <div class="dessert-visual">🍫</div>
+        <div class="dessert-info">
+          <div class="dessert-name">Gourmand Brownie</div>
+          <div class="dessert-desc">Brownie maison chocolat-noix, fondant à cœur, sauce caramel.</div>
+          <span class="price-tag">3,50€</span>
+        </div>
+      </div>
+      <div class="dessert-card fade-in">
+        <div class="dessert-visual">🍪</div>
+        <div class="dessert-info">
+          <div class="dessert-name">Le Craquant Cookie</div>
+          <div class="dessert-desc">Cookie XXL fait maison, pépites de chocolat, cœur tendre.</div>
+          <span class="price-tag">2,50€</span>
+        </div>
+      </div>
+      <div class="dessert-card fade-in">
+        <div class="dessert-visual">✨</div>
+        <div class="dessert-info">
+          <div class="dessert-name">Desserts du Moment</div>
+          <div class="dessert-desc">Création saisonnière de notre pâtissier — demandez à nos équipes.</div>
+          <span class="price-tag" style="color:var(--grey);">Demandez-nous</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOISSONS ══════════════════════════════════════════════ -->
+<section id="boissons">
+  <div class="container">
+    <div class="menu-header fade-in">
+      <h2 class="section-title">Les <span>Boissons</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="boissons-grid">
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">🥤</div>
+        <div class="boisson-cat">Boissons</div>
+        <div class="boisson-name">Boisson 33cl</div>
+        <div class="boisson-desc">Coca, Pepsi, Sprite, Oasis, Ice Tea — au choix</div>
+        <span class="price-tag">2,80€</span>
+      </div>
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">🍺</div>
+        <div class="boisson-cat">Premium</div>
+        <div class="boisson-name">Boisson Premium</div>
+        <div class="boisson-desc">Sélection de boissons premium, bières artisanales</div>
+        <span class="price-tag">7€</span>
+      </div>
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">💧</div>
+        <div class="boisson-cat">Eau</div>
+        <div class="boisson-name">Eau 50cl</div>
+        <div class="boisson-desc">Eau plate ou pétillante</div>
+        <span class="price-tag">1,50€</span>
+      </div>
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">☕</div>
+        <div class="boisson-cat">Chaude</div>
+        <div class="boisson-name">Boisson Chaude</div>
+        <div class="boisson-desc">Café, cappuccino, thé, chocolat chaud</div>
+        <span class="price-tag">≈ 2€</span>
+      </div>
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">🥭</div>
+        <div class="boisson-cat">Smoothies</div>
+        <div class="boisson-name">Exotic</div>
+        <div class="boisson-desc">Mangue, ananas, fruit de la passion — smoothie frais</div>
+        <span class="price-tag">6€</span>
+      </div>
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">🥥</div>
+        <div class="boisson-cat">Smoothies</div>
+        <div class="boisson-name">Passion Coco</div>
+        <div class="boisson-desc">Noix de coco, passion, lait de coco</div>
+        <span class="price-tag">6€</span>
+      </div>
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">🥬</div>
+        <div class="boisson-cat">Smoothies</div>
+        <div class="boisson-name">Détox</div>
+        <div class="boisson-desc">Épinard, concombre, pomme verte, gingembre, citron</div>
+        <span class="price-tag">6€</span>
+      </div>
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">🍫</div>
+        <div class="boisson-cat">Milkshakes</div>
+        <div class="boisson-name">Les Chocolatés</div>
+        <div class="boisson-desc">Nutella, Kinder, Oreo — onctueux et généreux</div>
+        <span class="price-tag">7€</span>
+      </div>
+      <div class="boisson-card fade-in">
+        <div class="boisson-icon">🍓</div>
+        <div class="boisson-cat">Milkshakes</div>
+        <div class="boisson-name">Les Fruités</div>
+        <div class="boisson-desc">Fraise, framboise, fruits rouges — frais et naturels</div>
+        <span class="price-tag">7€</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT / CHAMPION ════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid fade-in">
+      <div class="about-content">
+        <p class="section-title" style="font-size:1rem;color:var(--orange);letter-spacing:.12em;font-family:'Inter',sans-serif;font-weight:600;margin-bottom:.75rem;">Notre Histoire</p>
+        <h2 class="section-title">La Station,<br><span>Passion & Excellence</span></h2>
+        <div class="divider"></div>
+        <p class="about-lead">
+          Née d'une passion absolue pour le burger artisanal et les produits frais,
+          La Station s'est imposée comme la référence burger en Île-de-France.
+          Notre consécration à la Coupe de France du Burger 2025 est la récompense
+          d'années de travail, d'exigence et d'amour du métier.
+        </p>
+        <ul class="about-features">
+          <li>
+            <div class="af-icon">🥩</div>
+            <div>
+              <strong style="color:var(--white);">Viande sélectionnée chaque matin</strong><br>
+              Nos steaks sont préparés quotidiennement à partir de viande française tracée,
+              sans conservateur ni congélation.
+            </div>
+          </li>
+          <li>
+            <div class="af-icon">🍞</div>
+            <div>
+              <strong style="color:var(--white);">Pain brioché artisanal</strong><br>
+              Nos pains briochés sont cuits chaque jour sur place — moelleux, légèrement
+              sucrés, ils subliment chaque burger.
+            </div>
+          </li>
+          <li>
+            <div class="af-icon">👨‍🍳</div>
+            <div>
+              <strong style="color:var(--white);">Pâtissier professionnel maison</strong><br>
+              Nos desserts sont réalisés par notre pâtissier dédié — cheesecake, tiramisu,
+              moelleux au chocolat — tout est fait sur place.
+            </div>
+          </li>
+          <li>
+            <div class="af-icon">🏆</div>
+            <div>
+              <strong style="color:var(--white);">Champion Île-de-France 2025</strong><br>
+              Vainqueur de la Coupe de France du Burger catégorie IDF — une reconnaissance
+              nationale de notre savoir-faire.
+            </div>
+          </li>
+        </ul>
+        <a href="#contact" class="btn-primary">📍 Venez nous rendre visite</a>
+      </div>
+      <div class="about-trophy">
+        <div class="trophy-display">
+          <div class="trophy-emoji">🏆</div>
+          <div class="trophy-title">Vainqueur IDF</div>
+          <div class="trophy-year">2025</div>
+          <div class="trophy-desc">Coupe de France du Burger</div>
+        </div>
+        <p style="font-size:.82rem;color:var(--grey);text-align:center;max-width:280px;line-height:1.7;">
+          La Station, seul restaurant de Deuil-la-Barre sacré champion Île-de-France
+          de la plus grande compétition de burger en France.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="menu-header fade-in">
+      <h2 class="section-title">Venez Nous <span>Rendre Visite</span></h2>
+      <div class="divider" style="margin:0 auto 2rem;"></div>
+    </div>
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-text">
+              <strong>Adresse</strong>
+              <span>41 Rue de la Gare<br>95170 Deuil-la-Barre</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-text">
+              <strong>Téléphone</strong>
+              <span><a href="tel:0134053475" style="color:var(--orange);font-weight:700;">01.34.05.34.75</a></span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🚂</div>
+            <div class="contact-item-text">
+              <strong>Accès</strong>
+              <span>À deux pas de la gare de Deuil-la-Barre — RER D, arrêt Deuil–Montmagny</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📱</div>
+            <div class="contact-item-text">
+              <strong>Réseaux Sociaux</strong>
+              <span>Suivez-nous pour nos actualités et offres spéciales</span>
+            </div>
+          </div>
+        </div>
+        <div class="map-placeholder" style="margin-top:1.5rem;" onclick="window.open('https://www.google.com/maps/search/41+Rue+de+la+Gare+95170+Deuil-la-Barre')">
+          <div class="map-icon">🗺️</div>
+          <div>41 Rue de la Gare, Deuil-la-Barre</div>
+          <a>Ouvrir dans Google Maps →</a>
+        </div>
+      </div>
+      <div>
+        <div class="hours-grid">
+          <h3>Horaires d'ouverture</h3>
+          <table class="hours-table">
+            <tbody>
+              <tr><td>Lundi – Vendredi</td><td>11h–14h30 &amp; 18h–22h30</td></tr>
+              <tr><td>Samedi</td><td>11h–23h (non-stop)</td></tr>
+              <tr class="highlight"><td>Dimanche midi</td><td class="closed">Fermé</td></tr>
+              <tr><td>Dimanche soir</td><td>18h–22h</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(224,123,42,.12),rgba(224,123,42,.06));border:1px solid rgba(224,123,42,.3);border-radius:var(--r);padding:1.5rem;">
+          <p style="font-size:.82rem;font-weight:700;color:var(--amber);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;">⚡ Commande rapide</p>
+          <p style="font-size:.85rem;color:rgba(245,240,232,.7);margin-bottom:1.25rem;">Commandez par téléphone ou sur nos plateformes partenaires — livraison et click & collect disponibles.</p>
+          <a href="tel:0134053475" class="btn-primary" style="font-size:.85rem;">📞 01.34.05.34.75</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo-circle" style="width:56px;height:56px;font-size:1.1rem;margin-bottom:1rem;">LS</div>
+        <div class="footer-brand-name">La Station</div>
+        <div class="footer-brand-tagline">Burger · Steakhouse · Artisan</div>
+        <p class="footer-brand-desc">
+          Vainqueur IDF de la Coupe de France du Burger 2025.
+          Nous créons des burgers d'exception avec des ingrédients 100&nbsp;% frais,
+          à Deuil-la-Barre depuis notre ouverture.
+        </p>
+        <div class="footer-social">
+          <div class="social-btn" title="Facebook">f</div>
+          <div class="social-btn" title="Instagram">📸</div>
+          <div class="social-btn" title="TikTok">♪</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="#signature">Notre Signature</a></li>
+          <li><a href="#menu">La Carte</a></li>
+          <li><a href="#desserts">Desserts</a></li>
+          <li><a href="#boissons">Boissons</a></li>
+          <li><a href="#about">Notre Histoire</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:0134053475">01.34.05.34.75</a></li>
+          <li><a>41 Rue de la Gare</a></li>
+          <li><a>95170 Deuil-la-Barre</a></li>
+          <li style="margin-top:.75rem;"><a style="color:var(--orange);">Lun–Ven : 11h–14h30 / 18h–22h30</a></li>
+          <li><a>Sam : 11h–23h</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 La Station — Burger & Steakhouse. Tous droits réservés.</span>
+      <span>🏆 Vainqueur IDF · Coupe de France du Burger 2025</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ═══════════════════════════════════════════════ -->
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile nav
+  const burgerBtn  = document.getElementById('nav-burger-btn');
+  const mobileNav  = document.getElementById('mobile-nav');
+  const closeBtn   = document.getElementById('mobile-nav-close');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  const openMenu = () => { mobileNav.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  const closeMenu = () => { mobileNav.classList.remove('open'); document.body.style.overflow = ''; };
+  burgerBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  mobileLinks.forEach(l => l.addEventListener('click', closeMenu));
+
+  // Menu tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabSections = document.querySelectorAll('.menu-section');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabSections.forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      const target = document.getElementById('tab-' + btn.dataset.tab);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Intersection observer fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Add button micro-interaction
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const orig = this.textContent;
+      this.textContent = '✓';
+      this.style.background = 'var(--orange)';
+      this.style.color = '#fff';
+      setTimeout(() => {
+        this.textContent = orig;
+        this.style.background = '';
+        this.style.color = '';
+      }, 1200);
+    });
+  });
+</script>
+</body>
+</html>
