@@ -5,25 +5,30 @@
 
 CMS.registerPreviewStyle('/styles.css');
 
-// React est exposé par Decap CMS sur window.React
+// React est exposé par netlify-cms sur window.React
 var React = window.React;
 if (!React) { React = { createElement: function() { return null; } }; }
 var h = React.createElement;
 
+// Convertit un chemin relatif en chemin absolu (fix iframe /admin/)
+function absPath(p) {
+  if (!p) return '';
+  if (p.startsWith('http') || p.startsWith('/') || p.startsWith('blob')) return p;
+  return '/' + p;
+}
+
 // ── Aperçu des paramètres généraux ──────────────────────────
 var GeneralPreview = function(props) {
   try {
-    var entry    = props.entry;
-    var getAsset = props.getAsset;
-    var data     = entry.get('data');
+    var entry = props.entry;
+    var data  = entry.get('data');
 
     var name       = data.get('photographer_name') || 'Votre Nom';
     var kicker     = data.get('hero_kicker')       || 'Photographe';
     var title      = data.get('hero_title')        || 'AMR Studio';
     var subtitle   = data.get('hero_subtitle')     || '';
-    var coverField = data.get('cover_image')       || '';
-    var coverAsset = coverField ? getAsset(coverField) : null;
-    var cover      = coverAsset ? coverAsset.toString() : '';
+    var coverField = data.get('cover_image') || '';
+    var cover      = absPath(coverField);
 
     var overviewTitle = data.get('overview_title') || '';
     var overviewText  = data.get('overview_text')  || '';
@@ -90,9 +95,8 @@ var GeneralPreview = function(props) {
 // ── Aperçu des galeries ──────────────────────────────────────
 var GalleriesPreview = function(props) {
   try {
-    var entry    = props.entry;
-    var getAsset = props.getAsset;
-    var data     = entry.get('data');
+    var entry = props.entry;
+    var data  = entry.get('data');
     var galleries = data.get('galleries');
 
     if (!galleries || !galleries.size) {
@@ -105,8 +109,7 @@ var GalleriesPreview = function(props) {
         h('section', { className: 'themes', style: { display: 'grid' } },
           galleries.map(function(g, i) {
             var coverField = g.get('cover') || '';
-            var coverAsset = coverField ? getAsset(coverField) : null;
-            var cover      = coverAsset ? coverAsset.toString() : '';
+            var cover      = absPath(coverField);
             var gTitle     = g.get('title')   || '—';
             var gTagline   = g.get('tagline') || '';
             var photos     = g.get('photos');
