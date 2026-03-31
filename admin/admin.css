@@ -1,0 +1,466 @@
+/* =============================================
+   AMR STUDIO — Interface Admin
+   3 couleurs : #111 (noir) · #f5f0eb (crème) · #c8a882 (or)
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  background: #111 !important;
+  color: #f5f0eb !important;
+  margin: 0 !important;
+}
+
+/* ── Fond général de l'app ── */
+div[class^="App-"], div[class*=" App-"],
+#nc-root, #nc-root > div {
+  background: #111 !important;
+  color: #f5f0eb !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
+
+/* ── Sidebar / Navigation ── */
+div[class*="Sidebar"], aside[class*="Sidebar"] {
+  background: #0a0a0a !important;
+  border-right: 1px solid rgba(200,168,130,0.15) !important;
+}
+
+/* Logo dans la sidebar */
+div[class*="CollectionTopContainer"],
+div[class*="SidebarNavLinkContainer"],
+a[class*="SidebarNavLink"] {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Liens de nav */
+a[class*="SidebarNavLink"] {
+  color: rgba(245,240,235,0.5) !important;
+  border-left: 2px solid transparent !important;
+  transition: all 0.2s ease !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+  padding: 10px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+}
+
+a[class*="SidebarNavLink"]:hover {
+  color: #c8a882 !important;
+  background: rgba(200,168,130,0.08) !important;
+  border-left-color: rgba(200,168,130,0.4) !important;
+}
+
+a[class*="SidebarNavLink"][class*="activeLink"],
+a[class*="SidebarNavLink"][class*="Active"] {
+  color: #c8a882 !important;
+  background: rgba(200,168,130,0.1) !important;
+  border-left-color: #c8a882 !important;
+}
+
+/* ── Header / Barre du haut ── */
+div[class*="AppHeader"],
+header[class*="Header"] {
+  background: #0a0a0a !important;
+  border-bottom: 1px solid rgba(200,168,130,0.12) !important;
+  box-shadow: none !important;
+}
+
+/* ── Zone de contenu ── */
+div[class*="Collection"],
+div[class*="Editor"],
+div[class*="EntryEditor"],
+main[class*="Main"],
+div[class*="MainView"] {
+  background: #111 !important;
+}
+
+/* ── Cartes de liste (items de collection) ── */
+div[class*="EntryListing"],
+div[class*="CardsGrid"] {
+  background: #111 !important;
+}
+
+a[class*="EntryCard"],
+div[class*="EntryCard"] {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(245,240,235,0.07) !important;
+  border-radius: 8px !important;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+  overflow: hidden !important;
+  text-decoration: none !important;
+}
+
+a[class*="EntryCard"]:hover,
+div[class*="EntryCard"]:hover {
+  border-color: rgba(200,168,130,0.35) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5) !important;
+}
+
+div[class*="EntryCard"] p,
+div[class*="EntryCard"] h3,
+div[class*="EntryCard"] span {
+  color: #f5f0eb !important;
+}
+
+/* ── Éditeur — panneaux ── */
+div[class*="ControlPane"],
+div[class*="EditorInterface"],
+div[class*="EditorControlPane"] {
+  background: #151515 !important;
+  border-right: 1px solid rgba(245,240,235,0.06) !important;
+}
+
+div[class*="PreviewPane"] {
+  background: #111 !important;
+  border-left: 1px solid rgba(200,168,130,0.12) !important;
+}
+
+/* ── Toolbar éditeur ── */
+div[class*="EditorToolbar"],
+div[class*="Toolbar"] {
+  background: #0a0a0a !important;
+  border-bottom: 1px solid rgba(245,240,235,0.07) !important;
+  padding: 8px 20px !important;
+}
+
+/* ── Champs de formulaire ── */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  background: #1e1e1e !important;
+  border: 1px solid rgba(245,240,235,0.12) !important;
+  border-radius: 6px !important;
+  color: #f5f0eb !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  padding: 10px 14px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  width: 100% !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #c8a882 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(200,168,130,0.15) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(245,240,235,0.3) !important;
+}
+
+/* ── Labels ── */
+label,
+div[class*="Label"],
+span[class*="Label"],
+p[class*="Label"] {
+  color: rgba(245,240,235,0.55) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ── Hints (texte d'aide sous les champs) ── */
+p[class*="Hint"],
+span[class*="hint"],
+div[class*="FieldHint"] {
+  color: rgba(245,240,235,0.3) !important;
+  font-size: 11px !important;
+  font-style: italic !important;
+}
+
+/* ── Boutons ── */
+button {
+  font-family: 'Inter', sans-serif !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Bouton Publier / Sauvegarder */
+button[class*="PublishButton"],
+button[class*="publishButton"],
+div[class*="PublishButton"] > button,
+div[class*="dropdown"] > button[class*="success"],
+button[data-testid*="publish"],
+button[class*="Success"] {
+  background: #c8a882 !important;
+  color: #111 !important;
+  border: none !important;
+  padding: 9px 20px !important;
+  font-weight: 600 !important;
+}
+
+button[class*="PublishButton"]:hover,
+button[class*="Success"]:hover {
+  background: #d4b896 !important;
+  box-shadow: 0 4px 16px rgba(200,168,130,0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Bouton Retour / Secondaire */
+button[class*="Back"],
+button[class*="back"],
+a[class*="back"],
+button[class*="Default"],
+button[class*="secondary"] {
+  background: transparent !important;
+  border: 1px solid rgba(245,240,235,0.15) !important;
+  color: rgba(245,240,235,0.6) !important;
+}
+
+button[class*="Back"]:hover,
+button[class*="Default"]:hover {
+  border-color: rgba(200,168,130,0.4) !important;
+  color: #c8a882 !important;
+}
+
+/* Bouton Nouvelle entrée */
+button[class*="NewEntry"],
+a[class*="NewEntry"] {
+  background: #c8a882 !important;
+  color: #111 !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+}
+
+button[class*="NewEntry"]:hover {
+  background: #d4b896 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(200,168,130,0.3) !important;
+}
+
+/* ── Widget Liste (galeries, photos) ── */
+div[class*="SortableList"],
+div[class*="listItem"],
+div[class*="ListItem"] {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(245,240,235,0.08) !important;
+  border-radius: 8px !important;
+  margin-bottom: 8px !important;
+  transition: border-color 0.2s ease !important;
+}
+
+div[class*="SortableList"]:hover,
+div[class*="ListItem"]:hover {
+  border-color: rgba(200,168,130,0.25) !important;
+}
+
+/* Bouton Ajouter un item */
+button[class*="AddButton"],
+button[class*="addButton"] {
+  border: 1px dashed rgba(200,168,130,0.35) !important;
+  background: transparent !important;
+  color: #c8a882 !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  width: 100% !important;
+}
+
+button[class*="AddButton"]:hover {
+  background: rgba(200,168,130,0.08) !important;
+  border-color: #c8a882 !important;
+}
+
+/* ── Widget Image ── */
+div[class*="ImageWrapper"],
+div[class*="imageWrapper"] {
+  border: 2px dashed rgba(245,240,235,0.1) !important;
+  border-radius: 8px !important;
+  background: #1a1a1a !important;
+  transition: border-color 0.2s ease !important;
+  overflow: hidden !important;
+}
+
+div[class*="ImageWrapper"]:hover {
+  border-color: rgba(200,168,130,0.4) !important;
+}
+
+/* ── Dropdown Statut (Brouillon, Prêt, Publié) ── */
+div[class*="StatusDropdown"],
+div[class*="Dropdown"] {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(245,240,235,0.1) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6) !important;
+}
+
+div[class*="DropdownItem"],
+button[class*="DropdownItem"] {
+  color: #f5f0eb !important;
+  background: transparent !important;
+  padding: 10px 16px !important;
+  transition: background 0.15s ease !important;
+}
+
+div[class*="DropdownItem"]:hover,
+button[class*="DropdownItem"]:hover {
+  background: rgba(200,168,130,0.1) !important;
+  color: #c8a882 !important;
+}
+
+/* ── Bibliothèque médias (upload images) ── */
+div[class*="MediaLibrary"],
+div[class*="MediaLibraryModal"] {
+  background: #151515 !important;
+  border: 1px solid rgba(245,240,235,0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.8) !important;
+}
+
+div[class*="MediaGridItem"],
+div[class*="mediaGridItem"] {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(245,240,235,0.08) !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  transition: all 0.2s ease !important;
+}
+
+div[class*="MediaGridItem"]:hover {
+  border-color: #c8a882 !important;
+  transform: scale(1.02) !important;
+}
+
+/* ── Modal / Dialogue ── */
+div[class*="ModalContainer"],
+div[class*="Dialog"] {
+  background: #151515 !important;
+  border: 1px solid rgba(245,240,235,0.1) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.85) !important;
+}
+
+/* Overlay modal */
+div[class*="Overlay"],
+div[class*="overlay"] {
+  background: rgba(0,0,0,0.75) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+/* ── Textes généraux ── */
+h1, h2, h3, h4, h5, h6 {
+  color: #f5f0eb !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+p, span, div, a, li {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ── Scrollbars ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(200,168,130,0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200,168,130,0.45); }
+
+/* ── Séparateurs ── */
+hr { border-color: rgba(245,240,235,0.07) !important; }
+
+/* ── Toasts / Notifications ── */
+div[class*="Toast"],
+div[class*="Notification"],
+div[class*="Alert"] {
+  background: #1e1e1e !important;
+  border: 1px solid rgba(245,240,235,0.1) !important;
+  border-radius: 8px !important;
+  color: #f5f0eb !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+}
+
+/* ── Tabs ── */
+button[class*="Tab"],
+div[class*="Tab"] {
+  color: rgba(245,240,235,0.45) !important;
+  border-bottom: 2px solid transparent !important;
+  background: none !important;
+  border-radius: 0 !important;
+  padding: 10px 16px !important;
+  transition: all 0.2s ease !important;
+}
+
+button[class*="Tab"]:hover {
+  color: #f5f0eb !important;
+}
+
+button[class*="Tab"][class*="active"],
+button[class*="Tab"][class*="Active"] {
+  color: #c8a882 !important;
+  border-bottom-color: #c8a882 !important;
+}
+
+/* ── Champ "collapsed" dans le widget list ── */
+div[class*="Collapsed"],
+button[class*="Collapsed"] {
+  background: #1a1a1a !important;
+  color: #f5f0eb !important;
+  border-radius: 8px !important;
+}
+
+/* ── Sortable drag handle ── */
+div[class*="DragHandle"],
+span[class*="DragHandle"] {
+  color: rgba(245,240,235,0.25) !important;
+  cursor: grab !important;
+}
+
+div[class*="DragHandle"]:hover {
+  color: #c8a882 !important;
+}
+
+/* ── Page titre collection ── */
+div[class*="CollectionHeader"],
+div[class*="collectionHeader"] {
+  background: #111 !important;
+  border-bottom: 1px solid rgba(245,240,235,0.07) !important;
+  padding: 24px !important;
+}
+
+div[class*="CollectionHeader"] h1,
+div[class*="CollectionHeader"] h2 {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  color: #f5f0eb !important;
+}
+
+/* ── Searchbar ── */
+input[class*="SearchInput"],
+input[class*="search"] {
+  background: #1e1e1e !important;
+  border: 1px solid rgba(245,240,235,0.1) !important;
+  border-radius: 20px !important;
+  color: #f5f0eb !important;
+}
+
+/* ── Badge de statut ── */
+div[class*="Badge"],
+span[class*="Badge"] {
+  border-radius: 20px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  padding: 3px 10px !important;
+}
