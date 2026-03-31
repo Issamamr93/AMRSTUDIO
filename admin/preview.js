@@ -1,9 +1,12 @@
 // =============================================
 // DECAP CMS — APERÇU EN TEMPS RÉEL
+// React est chargé via CDN dans admin/index.html
 // =============================================
+
 var h = React.createElement;
 
-var HeroPreview = function(props) {
+// ── Aperçu des paramètres généraux ──────────────────────────
+var GeneralPreview = function(props) {
   var entry = props.entry;
   var getAsset = props.getAsset;
   var data = entry.get('data');
@@ -12,72 +15,107 @@ var HeroPreview = function(props) {
   var kicker     = data.get('hero_kicker')       || 'Photographe';
   var title      = data.get('hero_title')        || 'AMR Studio';
   var subtitle   = data.get('hero_subtitle')     || '';
-  var coverField = data.get('cover_image');
-  var cover      = coverField ? getAsset(coverField).toString() : '';
+  var coverField = data.get('cover_image')       || '';
+  var coverAsset = coverField ? getAsset(coverField) : null;
+  var cover      = coverAsset ? coverAsset.toString() : '';
 
-  var overviewTitle = data.get('overview_title') || 'Ce que j\'ai capturé';
+  var overviewTitle = data.get('overview_title') || '';
   var overviewText  = data.get('overview_text')  || '';
-
-  var footerTagline = data.get('footer_tagline') || 'Photographe.';
+  var footerTagline = data.get('footer_tagline') || '';
   var footerText    = data.get('footer_text')    || '';
   var email         = data.get('email')          || '';
-  var instagram     = data.get('instagram_url')  || '';
 
-  var galleries = ['chamonix', 'suisse', 'indonesie', 'malaisie', 'ldc'];
+  return h('div', { 'data-theme': 'light' },
 
-  return h('div', { style: { fontFamily: "'Georgia', serif", background: '#111', color: '#fff', minHeight: '100vh' } },
-
-    // ── HERO ──
-    h('section', { style: { display: 'flex', gap: '32px', alignItems: 'center', padding: '48px 40px', borderBottom: '1px solid #2a2a2a' } },
-      cover && h('img', { src: cover, style: { width: '180px', height: '230px', objectFit: 'cover', flexShrink: 0 } }),
-      h('div', {},
-        h('p', { style: { color: '#c9a96e', fontSize: '11px', letterSpacing: '3px', margin: '0 0 4px' } }, name.toUpperCase()),
-        h('p', { style: { color: '#c9a96e', fontSize: '10px', letterSpacing: '2px', margin: '0 0 14px' } }, kicker.toUpperCase()),
-        h('h1', { style: { fontSize: '28px', letterSpacing: '5px', fontWeight: 'normal', margin: '0 0 16px', color: '#fff' } }, title.toUpperCase()),
-        h('p', { style: { color: '#bbb', fontSize: '13px', lineHeight: '1.8', margin: '0 0 20px', maxWidth: '380px' } }, subtitle),
-        h('button', { style: { background: 'transparent', border: '1px solid #c9a96e', color: '#c9a96e', padding: '8px 20px', fontSize: '10px', letterSpacing: '2px', cursor: 'default' } }, 'VOIR LES PHOTOS')
+    // ── Nav ──
+    h('header', { className: 'top-nav scrolled', style: { position: 'relative' } },
+      h('div', { className: 'top-nav-inner' },
+        h('div', { className: 'top-nav-brand' }, name + ' — ' + title)
       )
     ),
 
-    // ── APERÇU ──
-    h('section', { style: { padding: '40px', borderBottom: '1px solid #2a2a2a' } },
-      h('h2', { style: { fontSize: '18px', fontWeight: 'normal', letterSpacing: '3px', color: '#c9a96e', marginBottom: '10px' } }, overviewTitle),
-      h('p', { style: { color: '#aaa', fontSize: '13px', lineHeight: '1.7', maxWidth: '500px' } }, overviewText)
-    ),
-
-    // ── GALERIES ──
-    h('section', { style: { padding: '40px', borderBottom: '1px solid #2a2a2a' } },
-      h('h2', { style: { fontSize: '12px', letterSpacing: '3px', color: '#555', marginBottom: '20px' } }, 'GALERIES'),
-      h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '12px' } },
-        galleries.map(function(key) {
-          var gTitle   = data.get('gallery_' + key + '_title')   || key;
-          var gTagline = data.get('gallery_' + key + '_tagline') || '';
-          var gDesc    = data.get('gallery_' + key + '_desc')    || '';
-          return h('div', { key: key, style: { background: '#1a1a1a', border: '1px solid #2a2a2a', padding: '14px', width: '160px' } },
-            h('p', { style: { color: '#c9a96e', fontSize: '12px', letterSpacing: '2px', margin: '0 0 4px' } }, gTitle.toUpperCase()),
-            h('p', { style: { color: '#777', fontSize: '11px', margin: '0 0 8px' } }, gTagline),
-            h('p', { style: { color: '#555', fontSize: '11px', lineHeight: '1.5', margin: 0 } }, gDesc)
-          );
-        })
+    // ── Hero ──
+    h('section', { className: 'hero' },
+      h('div', { className: 'hero-inner' },
+        cover
+          ? h('div', { className: 'hero-media' },
+              h('img', { src: cover, className: 'hero-image', alt: name })
+            )
+          : null,
+        h('div', { className: 'hero-content' },
+          h('div', { className: 'hero-name' }, name),
+          h('p',   { className: 'hero-kicker' }, kicker),
+          h('h1',  { className: 'hero-title' }, title),
+          h('p',   { className: 'hero-subtitle' }, subtitle),
+          h('button', { className: 'hero-button', type: 'button' }, 'Voir les photos')
+        )
       )
     ),
 
-    // ── FOOTER ──
-    h('footer', { style: { padding: '40px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' } },
-      h('div', {},
-        h('p', { style: { color: '#c9a96e', fontSize: '16px', margin: '0 0 4px' } }, name),
-        h('p', { style: { color: '#888', fontSize: '12px', margin: '0 0 10px' } }, footerTagline),
-        h('p', { style: { color: '#666', fontSize: '12px', lineHeight: '1.6', maxWidth: '300px' } }, footerText)
-      ),
-      h('div', { style: { display: 'flex', flexDirection: 'column', gap: '8px' } },
-        h('a', { style: { color: '#aaa', fontSize: '12px', textDecoration: 'none' } }, email),
-        h('a', { style: { color: '#aaa', fontSize: '12px', textDecoration: 'none' } }, 'Instagram'),
-        h('a', { style: { color: '#aaa', fontSize: '12px', textDecoration: 'none' } }, 'LinkedIn')
+    // ── Section Aperçu ──
+    h('section', { className: 'home-overview', style: { padding: '60px 40px' } },
+      h('div', { className: 'home-overview-text' },
+        h('h2', {}, overviewTitle),
+        h('p',  {}, overviewText)
+      )
+    ),
+
+    // ── Footer ──
+    h('footer', { className: 'footer' },
+      h('div', { className: 'footer-top' },
+        h('div', { className: 'footer-identity' },
+          h('p', { className: 'footer-name' }, name),
+          h('p', { className: 'footer-tagline' }, footerTagline),
+          h('p', { className: 'footer-text' }, footerText)
+        ),
+        h('nav', { className: 'footer-links' },
+          h('a', { href: '#' }, email),
+          h('a', { href: '#' }, 'Instagram'),
+          h('a', { href: '#' }, 'LinkedIn')
+        )
       )
     )
   );
 };
 
-CMS.registerPreviewTemplate('general', HeroPreview);
+// ── Aperçu des galeries ──────────────────────────────────────
+var GalleriesPreview = function(props) {
+  var entry = props.entry;
+  var getAsset = props.getAsset;
+  var data = entry.get('data');
+  var galleries = data.get('galleries');
+
+  if (!galleries || !galleries.size) {
+    return h('div', { style: { padding: '40px', color: '#888' } }, 'Aucune galerie définie.');
+  }
+
+  return h('div', { 'data-theme': 'light' },
+    h('div', { style: { padding: '30px 20px' } },
+      h('h2', { style: { fontSize: '12px', letterSpacing: '3px', color: '#888', marginBottom: '24px' } }, 'GALERIES'),
+      h('section', { className: 'themes', style: { display: 'grid' } },
+        galleries.map(function(g, i) {
+          var coverField = g.get('cover') || '';
+          var coverAsset = coverField ? getAsset(coverField) : null;
+          var cover      = coverAsset ? coverAsset.toString() : '';
+          var gTitle     = g.get('title')   || '—';
+          var gTagline   = g.get('tagline') || '';
+          var photos     = g.get('photos');
+          var count      = photos ? photos.size : 0;
+
+          return h('article', { key: i, className: 'theme-card' },
+            cover && h('img', { src: cover, alt: gTitle, loading: 'lazy' }),
+            h('div', { className: 'theme-overlay' },
+              h('span', { className: 'theme-title' }, gTitle),
+              h('span', { className: 'theme-tagline' }, gTagline),
+              h('span', { className: 'theme-count' }, count + ' photos')
+            )
+          );
+        }).toArray()
+      )
+    )
+  );
+};
 
 CMS.registerPreviewStyle('/styles.css');
+CMS.registerPreviewTemplate('general',        GeneralPreview);
+CMS.registerPreviewTemplate('galleries_data', GalleriesPreview);

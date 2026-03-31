@@ -41,26 +41,6 @@ async function applySettings() {
       if (el) el.textContent = s.overview_text;
     }
 
-    // ── GALERIES — titres et taglines dans les cartes ──
-    const galleriesMap = ['chamonix', 'suisse', 'indonesie', 'malaisie', 'ldc'];
-    galleriesMap.forEach(key => {
-      const card = document.querySelector(`.theme-card[data-theme="${key}"]`);
-      if (!card) return;
-      if (s['gallery_' + key + '_title']) {
-        const titleEl = card.querySelector('.theme-title');
-        if (titleEl) titleEl.textContent = s['gallery_' + key + '_title'];
-        card.dataset.title = s['gallery_' + key + '_title'];
-      }
-      if (s['gallery_' + key + '_tagline']) {
-        const taglineEl = card.querySelector('.theme-tagline');
-        if (taglineEl) taglineEl.textContent = s['gallery_' + key + '_tagline'];
-      }
-      // Mettre à jour aussi les descriptions pour la vue galerie
-      if (s['gallery_' + key + '_desc']) {
-        GALLERY_DESCRIPTIONS[key] = s['gallery_' + key + '_desc'];
-      }
-    });
-
     // ── FOOTER ──
     if (s.footer_tagline) {
       const el = document.querySelector('.footer-tagline');
@@ -95,57 +75,65 @@ async function applySettings() {
 }
 
 // =============================================
-// DONNÉES DES GALERIES
+// DONNÉES DES GALERIES (chargées depuis _data/galleries.json)
 // =============================================
-const GALLERIES = {
-  chamonix: [
-    { src: 'assets/voyages/chamonix/DSC02965.jpg',  caption: 'Lac Blanc' },
-    { src: 'assets/voyages/chamonix/DSC02979.jpg',  caption: 'Lac Blanc' },
-    { src: 'assets/voyages/chamonix/lacblanc.jpeg', caption: 'Lac Blanc' },
-    { src: 'assets/voyages/chamonix/DSC03014.jpg',  caption: 'Lac Blanc' },
-  ],
-  suisse: [
-    { src: 'assets/voyages/suisse/cascade.jpg',    caption: 'Lauterbrunnen' },
-    { src: 'assets/voyages/suisse/chalet.jpeg',    caption: 'Lauterbrunnen' },
-    { src: 'assets/voyages/suisse/DSC01173.jpg',   caption: 'Mürren' },
-    { src: 'assets/voyages/suisse/IMG_5384.JPG',   caption: 'Lac Oeschinensee' },
-    { src: 'assets/voyages/suisse/couple.jpg',     caption: 'Mürren' },
-    { src: 'assets/voyages/suisse/moi.jpg',        caption: 'Lac Blausee' },
-    { src: 'assets/voyages/suisse/ochi.jpg',       caption: 'Lac Oeschinensee' },
-  ],
-  indonesie: [
-    { src: 'assets/voyages/indonesie/4-DSC02723.jpg',  caption: 'Kelingking Beach' },
-    { src: 'assets/voyages/indonesie/3-DSC02752.jpg',  caption: 'Nusa Penida' },
-    { src: 'assets/voyages/indonesie/DSC02820.jpg',    caption: 'Mont Batur' },
-    { src: 'assets/voyages/indonesie/DSC02838.jpg',    caption: 'Mont Batur' },
-    { src: 'assets/voyages/indonesie/IMG_3278.jpeg',   caption: 'Sanur' },
-    { src: 'assets/voyages/indonesie/sanur.jpg',       caption: 'Sanur' },
-    { src: 'assets/voyages/indonesie/sanur2.jpg',      caption: 'Sanur' },
-  ],
-  malaisie: [
-    { src: 'assets/voyages/malaisie/DSC02487.jpg',   caption: 'Langkawi' },
-    { src: 'assets/voyages/malaisie/DSC02529.jpg',   caption: 'Langkawi' },
-    { src: 'assets/voyages/malaisie/mrose.jpeg',     caption: 'Putrajaya' },
-    { src: 'assets/voyages/malaisie/mrose2.jpeg',    caption: 'Putrajaya' },
-    { src: 'assets/voyages/malaisie/putrajaya.jpeg', caption: 'Putrajaya' },
-  ],
-  ldc: [
-    { src: 'assets/voyages/ldc/ldc.jpg',   caption: 'LDC' },
-    { src: 'assets/voyages/ldc/nldc.jpg',  caption: 'LDC' },
-    { src: 'assets/voyages/ldc/ldc2.jpg',  caption: 'LDC' },
-  ],
-};
+let galleriesData = [];
 
-// =============================================
-// DESCRIPTIONS DES GALERIES
-// =============================================
-const GALLERY_DESCRIPTIONS = {
-  chamonix:  'Quelques jours dans les Alpes, entre le Mont-Blanc et le Lac Blanc.',
-  suisse:    'Des sorties en Suisse — cascades, montagnes, et quelques portraits.',
-  indonesie: 'Un séjour à Bali et Sanur. Chaleur, végétation, lumière de fin de journée.',
-  malaisie:  'Kuala Lumpur et Putrajaya — villes, architecture et rencontres.',
-  ldc:       'Photos prises au LDC.',
-};
+function renderThemeCards() {
+  const container = document.getElementById('themes');
+  if (!container) return;
+  container.innerHTML = '';
+  galleriesData.forEach(g => {
+    const count = g.photos ? g.photos.length : 0;
+    const article = document.createElement('article');
+    article.className = 'theme-card';
+    article.dataset.theme = g.key;
+    article.dataset.title = g.title;
+    article.dataset.count = count;
+    article.tabIndex = 0;
+    article.setAttribute('role', 'button');
+    article.setAttribute('aria-label', `Ouvrir la galerie ${g.title} — ${count} photos`);
+    article.innerHTML = `
+      <img src="${g.cover}" alt="${g.title}" loading="lazy" />
+      <div class="theme-overlay">
+        <span class="theme-title">${g.title}</span>
+        <span class="theme-tagline">${g.tagline || ''}</span>
+        <span class="theme-count">${count} photos</span>
+      </div>
+    `;
+    container.appendChild(article);
+  });
+}
+
+function renderOverviewThumbs() {
+  const grid = document.getElementById('overview-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  galleriesData.forEach(g => {
+    const btn = document.createElement('button');
+    btn.className = 'home-overview-thumb';
+    btn.dataset.theme = g.key;
+    btn.dataset.title = g.title;
+    btn.type = 'button';
+    btn.setAttribute('aria-label', `Ouvrir la galerie ${g.title}`);
+    const imgSrc = g.overview_image || g.cover;
+    btn.innerHTML = `<img src="${imgSrc}" alt="Aperçu ${g.title}" loading="lazy" />`;
+    grid.appendChild(btn);
+  });
+}
+
+async function loadAndRenderGalleries() {
+  try {
+    const res = await fetch('_data/galleries.json');
+    if (!res.ok) return;
+    const json = await res.json();
+    galleriesData = json.galleries || [];
+    renderThemeCards();
+    renderOverviewThumbs();
+  } catch (e) {
+    // Silently ignore
+  }
+}
 
 // =============================================
 // ÉTAT DU LIGHTBOX
@@ -157,6 +145,7 @@ let currentGalleryTheme = '';
 document.addEventListener('DOMContentLoaded', () => {
 
   applySettings();
+  loadAndRenderGalleries();
 
   // =============================================
   // DARK MODE
@@ -200,12 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const openButton    = document.getElementById('open-collection');
 
-  const themeCards    = document.querySelectorAll('.theme-card');
   const galleryView   = document.getElementById('gallery-view');
   const galleryTitle  = document.getElementById('gallery-title');
   const galleryGrid   = document.getElementById('gallery-grid');
   const backBtn       = document.getElementById('back-to-themes');
-  const overviewThumbs = document.querySelectorAll('.home-overview-thumb');
 
   const contactToggle  = document.getElementById('contact-toggle');
   const contactWrapper = document.getElementById('contact-form-wrapper');
@@ -354,45 +341,51 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   // =============================================
-  // THÈMES — CLICS ET CLAVIER
+  // THÈMES — DÉLÉGATION D'ÉVÉNEMENTS
   // =============================================
-  themeCards.forEach((card) => {
-    card.addEventListener('click', () => {
-      showGallery(card.dataset.theme, card.dataset.title || '');
+  const themesEl = document.getElementById('themes');
+  if (themesEl) {
+    themesEl.addEventListener('click', (e) => {
+      const card = e.target.closest('.theme-card');
+      if (card) showGallery(card.dataset.theme, card.dataset.title || '');
     });
-
-    // Accessibilité clavier (Enter / Espace)
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+    themesEl.addEventListener('keydown', (e) => {
+      const card = e.target.closest('.theme-card');
+      if (card && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault();
         showGallery(card.dataset.theme, card.dataset.title || '');
       }
     });
-
-    // Curseur custom
-    card.addEventListener('mouseenter', () => {
-      document.body.style.cursor = 'none';
-      exploreCursor.style.opacity = '1';
+    themesEl.addEventListener('mouseover', (e) => {
+      if (e.target.closest('.theme-card')) {
+        document.body.style.cursor = 'none';
+        exploreCursor.style.opacity = '1';
+      }
     });
-
-    card.addEventListener('mouseleave', () => {
-      document.body.style.cursor = '';
-      exploreCursor.style.opacity = '0';
+    themesEl.addEventListener('mouseout', (e) => {
+      const card = e.target.closest('.theme-card');
+      if (card && !card.contains(e.relatedTarget)) {
+        document.body.style.cursor = '';
+        exploreCursor.style.opacity = '0';
+      }
     });
-
-    card.addEventListener('mousemove', (e) => {
-      exploreCursor.style.transform = `translate(${e.clientX - 37}px, ${e.clientY - 37}px)`;
+    themesEl.addEventListener('mousemove', (e) => {
+      if (e.target.closest('.theme-card')) {
+        exploreCursor.style.transform = `translate(${e.clientX - 37}px, ${e.clientY - 37}px)`;
+      }
     });
-  });
+  }
 
   // =============================================
-  // APERÇU — OUVRIR UN THÈME
+  // APERÇU — DÉLÉGATION D'ÉVÉNEMENTS
   // =============================================
-  overviewThumbs.forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      showGallery(thumb.dataset.theme, thumb.dataset.title || '');
+  const overviewGridEl = document.getElementById('overview-grid');
+  if (overviewGridEl) {
+    overviewGridEl.addEventListener('click', (e) => {
+      const thumb = e.target.closest('.home-overview-thumb');
+      if (thumb) showGallery(thumb.dataset.theme, thumb.dataset.title || '');
     });
-  });
+  }
 
   // =============================================
   // RETOUR AUX THÈMES
@@ -420,7 +413,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // AFFICHER UNE GALERIE
   // =============================================
   function showGallery(themeKey, title) {
-    const images = GALLERIES[themeKey] || [];
+    const gallery = galleriesData.find(g => g.key === themeKey);
+    const images = gallery ? (gallery.photos || []) : [];
     const themesSection = document.getElementById('themes');
     currentGalleryTheme = themeKey;
 
@@ -432,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
       galleryTitle.textContent = title;
       const gallerySubtitle = document.getElementById('gallery-subtitle');
       if (gallerySubtitle) {
-        gallerySubtitle.textContent = GALLERY_DESCRIPTIONS[themeKey] || '';
+        gallerySubtitle.textContent = gallery ? (gallery.description || '') : '';
       }
       galleryGrid.innerHTML = '';
 

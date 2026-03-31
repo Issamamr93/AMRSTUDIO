@@ -9,59 +9,52 @@ collections:
   - name: "settings"
     label: "Paramètres du site"
     files:
+
+      # ── INFORMATIONS GÉNÉRALES ─────────────────────────────
       - label: "Informations générales"
         name: "general"
         file: "_data/settings.json"
         format: json
         fields:
-
-          # ── HERO ──────────────────────────────────────
-          - label: "── SECTION HERO ──"
-            name: "sep_hero"
-            widget: "hidden"
-            default: ""
-          - { label: "Nom du photographe", name: "photographer_name", widget: "string", hint: "Affiché en haut du hero et dans la navigation" }
-          - { label: "Sous-titre (ex: Photographe)", name: "hero_kicker", widget: "string" }
-          - { label: "Titre principal", name: "hero_title", widget: "string", hint: "Ex: AMR Studio" }
+          - { label: "Nom du photographe", name: "photographer_name", widget: "string", hint: "Affiché dans la nav et le hero" }
+          - { label: "Sous-titre hero (ex: Photographe)", name: "hero_kicker", widget: "string" }
+          - { label: "Titre principal (ex: AMR Studio)", name: "hero_title", widget: "string" }
           - { label: "Description hero", name: "hero_subtitle", widget: "text" }
           - { label: "Photo de couverture", name: "cover_image", widget: "image" }
-
-          # ── APERÇU ────────────────────────────────────
-          - { label: "── SECTION APERÇU ──", name: "sep_overview", widget: "hidden", default: "" }
-          - { label: "Titre de la section aperçu", name: "overview_title", widget: "string" }
-          - { label: "Texte de la section aperçu", name: "overview_text", widget: "text" }
-
-          # ── GALERIES ──────────────────────────────────
-          - { label: "── GALERIES ──", name: "sep_galleries", widget: "hidden", default: "" }
-
-          - { label: "Chamonix — Titre", name: "gallery_chamonix_title", widget: "string" }
-          - { label: "Chamonix — Sous-titre", name: "gallery_chamonix_tagline", widget: "string" }
-          - { label: "Chamonix — Description", name: "gallery_chamonix_desc", widget: "text" }
-
-          - { label: "Suisse — Titre", name: "gallery_suisse_title", widget: "string" }
-          - { label: "Suisse — Sous-titre", name: "gallery_suisse_tagline", widget: "string" }
-          - { label: "Suisse — Description", name: "gallery_suisse_desc", widget: "text" }
-
-          - { label: "Indonésie — Titre", name: "gallery_indonesie_title", widget: "string" }
-          - { label: "Indonésie — Sous-titre", name: "gallery_indonesie_tagline", widget: "string" }
-          - { label: "Indonésie — Description", name: "gallery_indonesie_desc", widget: "text" }
-
-          - { label: "Malaisie — Titre", name: "gallery_malaisie_title", widget: "string" }
-          - { label: "Malaisie — Sous-titre", name: "gallery_malaisie_tagline", widget: "string" }
-          - { label: "Malaisie — Description", name: "gallery_malaisie_desc", widget: "text" }
-
-          - { label: "LDC — Titre", name: "gallery_ldc_title", widget: "string" }
-          - { label: "LDC — Sous-titre", name: "gallery_ldc_tagline", widget: "string" }
-          - { label: "LDC — Description", name: "gallery_ldc_desc", widget: "text" }
-
-          # ── FOOTER ────────────────────────────────────
-          - { label: "── FOOTER & CONTACT ──", name: "sep_footer", widget: "hidden", default: "" }
+          - { label: "Titre section aperçu", name: "overview_title", widget: "string" }
+          - { label: "Texte section aperçu", name: "overview_text", widget: "text" }
           - { label: "Accroche pied de page", name: "footer_tagline", widget: "string" }
           - { label: "Texte pied de page", name: "footer_text", widget: "text" }
           - { label: "E-mail de contact", name: "email", widget: "string" }
           - { label: "URL Instagram", name: "instagram_url", widget: "string" }
           - { label: "URL LinkedIn", name: "linkedin_url", widget: "string" }
+          - { label: "Description SEO (Google)", name: "meta_description", widget: "text" }
 
-          # ── SEO ───────────────────────────────────────
-          - { label: "── SEO ──", name: "sep_seo", widget: "hidden", default: "" }
-          - { label: "Description SEO (meta description)", name: "meta_description", widget: "text", hint: "Texte affiché dans les résultats Google" }
+      # ── GALERIES PHOTO ────────────────────────────────────
+      - label: "Galeries photo"
+        name: "galleries_data"
+        file: "_data/galleries.json"
+        format: json
+        fields:
+          - label: "Liste des galeries"
+            name: "galleries"
+            widget: list
+            allow_add: true
+            collapsed: true
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Identifiant (ex: tokyo, paris…)", name: "key", widget: "string", hint: "Unique, sans espaces ni majuscules" }
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre (lieu, style…)", name: "tagline", widget: "string" }
+              - { label: "Description de la galerie", name: "description", widget: "text" }
+              - { label: "Image de couverture (carte thème)", name: "cover", widget: "image" }
+              - { label: "Miniature aperçu (grille d'accueil)", name: "overview_image", widget: "image", required: false }
+              - label: "Photos"
+                name: "photos"
+                widget: list
+                allow_add: true
+                collapsed: true
+                summary: "{{fields.caption}}"
+                fields:
+                  - { label: "Photo", name: "src", widget: "image" }
+                  - { label: "Légende (optionnel)", name: "caption", widget: "string", required: false }
