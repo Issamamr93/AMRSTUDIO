@@ -61,7 +61,7 @@ function buildSiteHTML(galJSON, setJSON) {
     '<!DOCTYPE html>' +
     '<html lang="fr" data-theme="light"><head>' +
     '<meta charset="UTF-8">' +
-    '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<meta name="viewport" content="width=1280">' +
     '<link rel="stylesheet" href="/styles.css">' +
     '</head><body>' +
 

@@ -1,34 +1,32 @@
 /* =============================================
    AMR STUDIO — Admin UI
-   Noir #111 · Crème #f0ece6 · Or #c8a882
+   #0f0e0d · #f5f2ee · #c8a882
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-/* ── Base ── */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { background: #111; }
+html { background: #0f0e0d; }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #111;
-  color: #f0ece6;
+  background: #0f0e0d;
+  color: #f5f2ee;
   margin: 0;
 }
 
-/* ── Liens ── */
-a { color: #f0ece6; text-decoration: none; }
+a { color: #f5f2ee; text-decoration: none; }
 a:hover { color: #c8a882; }
 
-/* ── Inputs & Textarea ── */
+/* ── Champs ── */
 input,
 textarea,
 select {
-  background: #1c1c1c;
-  border: 1px solid rgba(240,236,230,0.12);
+  background: #1c1a18;
+  border: 1px solid rgba(245,242,238,0.1);
   border-radius: 6px;
-  color: #f0ece6;
+  color: #f5f2ee;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 14px;
   padding: 10px 14px;
@@ -40,18 +38,18 @@ input:focus,
 textarea:focus,
 select:focus {
   border-color: #c8a882;
-  box-shadow: 0 0 0 3px rgba(200,168,130,0.15);
+  box-shadow: 0 0 0 3px rgba(200,168,130,0.12);
   outline: none;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: rgba(240,236,230,0.3);
+  color: rgba(245,242,238,0.28);
 }
 
 /* ── Labels ── */
 label {
-  color: rgba(240,236,230,0.5);
+  color: rgba(245,242,238,0.45);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -67,31 +65,29 @@ button {
   font-weight: 500;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.18s;
 }
 
 /* ── Titres ── */
 h1, h2, h3, h4, h5, h6 {
-  color: #f0ece6;
+  color: #f5f2ee;
   font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
 }
 
-/* ── Paragraphes & spans ── */
-p, span, li {
+p, span, li, div {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* ── Scrollbars ── */
-::-webkit-scrollbar { width: 5px; height: 5px; }
+/* ── Scrollbars fines ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(200,168,130,0.25);
-  border-radius: 3px;
+  background: rgba(200,168,130,0.2);
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(200,168,130,0.5);
+  background: rgba(200,168,130,0.45);
 }
 
-/* ── Séparateurs ── */
-hr { border: none; border-top: 1px solid rgba(240,236,230,0.08); }
+hr { border: none; border-top: 1px solid rgba(245,242,238,0.07); }
