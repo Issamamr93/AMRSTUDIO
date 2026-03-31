@@ -7,10 +7,16 @@ async function applySettings() {
     if (!res.ok) return;
     const s = await res.json();
 
+    // ── HERO ──
     if (s.photographer_name) {
       document.querySelectorAll('.hero-name, .footer-name').forEach(el => el.textContent = s.photographer_name);
-      document.querySelector('.top-nav-brand').textContent = s.photographer_name + ' — AMR Studio';
-      document.title = s.photographer_name + ' — AMR Studio';
+      const brand = document.querySelector('.top-nav-brand');
+      if (brand) brand.textContent = s.photographer_name + ' — ' + (s.hero_title || 'AMR Studio');
+      document.title = s.photographer_name + ' — ' + (s.hero_title || 'AMR Studio');
+    }
+    if (s.hero_kicker) {
+      const el = document.querySelector('.hero-kicker');
+      if (el) el.textContent = s.hero_kicker;
     }
     if (s.hero_title) {
       const el = document.querySelector('.hero-title');
@@ -20,6 +26,42 @@ async function applySettings() {
       const el = document.querySelector('.hero-subtitle');
       if (el) el.textContent = s.hero_subtitle;
     }
+    if (s.cover_image) {
+      const el = document.querySelector('.hero-image');
+      if (el) el.src = s.cover_image;
+    }
+
+    // ── SECTION APERÇU ──
+    if (s.overview_title) {
+      const el = document.querySelector('.home-overview-text h2');
+      if (el) el.textContent = s.overview_title;
+    }
+    if (s.overview_text) {
+      const el = document.querySelector('.home-overview-text p');
+      if (el) el.textContent = s.overview_text;
+    }
+
+    // ── GALERIES — titres et taglines dans les cartes ──
+    const galleriesMap = ['chamonix', 'suisse', 'indonesie', 'malaisie', 'ldc'];
+    galleriesMap.forEach(key => {
+      const card = document.querySelector(`.theme-card[data-theme="${key}"]`);
+      if (!card) return;
+      if (s['gallery_' + key + '_title']) {
+        const titleEl = card.querySelector('.theme-title');
+        if (titleEl) titleEl.textContent = s['gallery_' + key + '_title'];
+        card.dataset.title = s['gallery_' + key + '_title'];
+      }
+      if (s['gallery_' + key + '_tagline']) {
+        const taglineEl = card.querySelector('.theme-tagline');
+        if (taglineEl) taglineEl.textContent = s['gallery_' + key + '_tagline'];
+      }
+      // Mettre à jour aussi les descriptions pour la vue galerie
+      if (s['gallery_' + key + '_desc']) {
+        GALLERY_DESCRIPTIONS[key] = s['gallery_' + key + '_desc'];
+      }
+    });
+
+    // ── FOOTER ──
     if (s.footer_tagline) {
       const el = document.querySelector('.footer-tagline');
       if (el) el.textContent = s.footer_tagline;
@@ -40,10 +82,13 @@ async function applySettings() {
       const el = document.querySelector('a[href*="linkedin"]');
       if (el) el.href = s.linkedin_url;
     }
-    if (s.cover_image) {
-      const el = document.querySelector('.hero-image');
-      if (el) el.src = s.cover_image;
+
+    // ── SEO ──
+    if (s.meta_description) {
+      const el = document.querySelector('meta[name="description"]');
+      if (el) el.setAttribute('content', s.meta_description);
     }
+
   } catch (e) {
     // Silently ignore — le site affiche les valeurs HTML par défaut
   }
