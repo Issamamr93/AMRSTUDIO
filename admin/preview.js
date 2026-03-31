@@ -104,17 +104,17 @@ var GalleriesPreview = function(props) {
     }
 
     return h('div', { 'data-theme': 'light' },
-      h('div', { style: { padding: '30px 20px' } },
-        h('h2', { style: { fontSize: '12px', letterSpacing: '3px', color: '#888', marginBottom: '24px' } }, 'GALERIES'),
+      h('div', { style: { padding: '20px' } },
+
+        // ── Cartes galeries ──
+        h('p', { style: { fontSize: '11px', letterSpacing: '3px', color: '#888', marginBottom: '16px' } }, 'GALERIES'),
         h('section', { className: 'themes', style: { display: 'grid' } },
           galleries.map(function(g, i) {
-            var coverField = g.get('cover') || '';
-            var cover      = absPath(coverField);
-            var gTitle     = g.get('title')   || '—';
-            var gTagline   = g.get('tagline') || '';
-            var photos     = g.get('photos');
-            var count      = photos ? photos.size : 0;
-
+            var cover   = absPath(g.get('cover') || '');
+            var gTitle  = g.get('title')   || '—';
+            var gTagline = g.get('tagline') || '';
+            var photos  = g.get('photos');
+            var count   = photos ? photos.size : 0;
             return h('article', { key: i, className: 'theme-card' },
               cover && h('img', { src: cover, alt: gTitle, loading: 'lazy' }),
               h('div', { className: 'theme-overlay' },
@@ -124,7 +124,32 @@ var GalleriesPreview = function(props) {
               )
             );
           }).toArray()
-        )
+        ),
+
+        // ── Photos de chaque galerie ──
+        galleries.map(function(g, i) {
+          var gTitle  = g.get('title') || '—';
+          var photos  = g.get('photos');
+          if (!photos || !photos.size) return null;
+
+          return h('div', { key: 'section-' + i, style: { marginTop: '40px' } },
+            h('p', { style: { fontSize: '11px', letterSpacing: '3px', color: '#888', marginBottom: '12px' } },
+              gTitle.toUpperCase() + ' — ' + photos.size + ' PHOTOS'
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' } },
+              photos.map(function(photo, j) {
+                var src     = absPath(photo.get('src') || '');
+                var caption = photo.get('caption') || '';
+                return h('figure', { key: j, style: { margin: 0, overflow: 'hidden' } },
+                  src && h('img', {
+                    src: src, alt: caption, loading: 'lazy',
+                    style: { width: '100%', height: '110px', objectFit: 'cover', display: 'block' }
+                  })
+                );
+              }).toArray()
+            )
+          );
+        }).toArray()
       )
     );
   } catch(e) {
