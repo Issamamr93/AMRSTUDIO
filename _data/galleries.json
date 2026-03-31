@@ -131,7 +131,7 @@
     {
       "key": "street",
       "title": "Street Photo",
-      "tagline": "Street",
+      "tagline": "street",
       "description": "Photos prises au LDC.",
       "cover": "/assets/voyages/ldc/ldc2.jpg",
       "overview_image": "/assets/voyages/ldc/ldc.jpg",
